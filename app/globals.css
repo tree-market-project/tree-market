@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Rasa:ital,wght@0,300..700;1,300..700&family=Readex+Pro:wght@160..700&display=swap');
+
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+html {
+  width: 100%;
+  height: 100%;
+  font-size: 16px;
+  line-height: 1.6;
+  font-family:  "Readex Pro","Rasa", sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
+  color: #111827;
+  letter-spacing: 0.25px;
+  }
+
+
+.scroller {
+--scrollbar-color-thumb: rgb(156 163 175); /*gray-400*/
+  --scrollbar-color-track: rgb(249 250 251); /*gray-50*/
+  --scrollbar-width: thin;
+  --scrollbar-width-legacy: 10px;
+}
+
+/* Modern browsers with `scrollbar-*` support */
+@supports (scrollbar-width: auto) {
+  .scroller {
+      scrollbar-color: var(--scrollbar-color-thumb) var(--scrollbar-color-track);
+      scrollbar-width: var(--scrollbar-width);
+  }
+}
+
+/* Legacy browsers with `::-webkit-scrollbar-*` support */
+@supports selector(::-webkit-scrollbar) {
+  .scroller::-webkit-scrollbar-thumb {
+      background: var(--scrollbar-color-thumb);
+  }
+  .scroller::-webkit-scrollbar-track {
+      background: var(--scrollbar-color-track);
+  }
+  .scroller::-webkit-scrollbar {
+      max-width: var(--scrollbar-width-legacy);
+      max-height: var(--scrollbar-width-legacy);
+  }
+}
