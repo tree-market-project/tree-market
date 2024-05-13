@@ -6,6 +6,7 @@ import { useInitializeWorker } from "@/hooks/useInitializeWorker"
 import { balance } from "@/types"
 import { useEffect, useState } from "react"
 import formatBalance from "@/utils/formatBalance"
+import Link from "next/link"
 
 const Tokens:React.FC<{setShowVault:any,setShowAddTokenModal:any,setShowTokenSlideout:any}> = ({setShowVault,setShowAddTokenModal,setShowTokenSlideout})=>{
     const {activeWallet,setActiveWallet,worker,setWorker} = useWalletContext()
@@ -129,7 +130,7 @@ const Tokens:React.FC<{setShowVault:any,setShowAddTokenModal:any,setShowTokenSli
                          </svg>
                        </div>
                        <div className="text-sm">                        
-                         <p>Wallet not detected. <u onClick={()=>setShowVault(false)} className="cursor-pointer">Connect a wallet</u> to view your Dero assets.</p>
+                         <p>Wallet not detected. <Link className={"underline"} href="/wallet">Connect a wallet</Link> to view your Dero assets.</p>
                        </div>
                      </div>/* <!-- notification --> */
                     }

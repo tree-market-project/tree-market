@@ -55,17 +55,19 @@ const toasterRef = useRef<ToasterRef | null>(null)
 
 <div className="content-wrapper grid xl:w-5/6 h-dvh">
   {/* <!-- COMPONENT dApp Header --> */}
-  <DappHeader headerText={"Wallet"}/>{/* <!-- dapp-header --> */}
+  <DappHeader headerText={"Vault"}/>{/* <!-- dapp-header --> */}
   <div className="relative lg:grid lg:grid-cols-5 xl:grid-cols-3 gap-4 mx-auto h-dvh w-full px-0 overflow-y-scroll lg:overflow-y-hidden scroller">
     {/* <!-- left-col --> */}
     <LeftColumn>
       
-      <WalletContent toasterRef={toasterRef} setShowConfirmRemoveModal={setShowConfirmRemoveModal} setShowVault={setShowVault} setShowRenameWalletModal={setShowRenameWalletModal} setShowRecoverFromDiskModal={setShowRecoverFromDiskModal} setShowRecoverFromHexModal={setShowRecoverFromHexModal} setShowRecoverFromSeedModal={setShowRecoverFromSeedModal} setShowFastRegModal={setShowFastRegModal} setShowEnterPassModal={setShowEnterPassModal}/> 
+      <LeftContent toasterRef={toasterRef} setShowEnterPassModal={setShowEnterPassModal} setShowVault={setShowVault} setShowTokenSlideout={setShowTokenSlideout} setShowAddTokenModal={setShowAddTokenModal}/>
+      
     </LeftColumn>
 
 <RightColumn>
+   
+    <RightContentVault setShowEnterPassModal={setShowEnterPassModal}/>
     
-    <RightContent toasterRef={toasterRef} app={activeWallet?.app||null}/>
 </RightColumn>
     {/* <!-- right-col --> */}
 

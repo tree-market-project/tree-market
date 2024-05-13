@@ -176,12 +176,12 @@ return( <div className="slideout-left relative z-40" aria-labelledby="slide-over
             </div>
           </div>
           </Link>
-
-                 <div className="menu-item relative flex items-center justify-start gap-4 cursor-default text-gray-400">
+                <Link href="/vault">
+                 <div className="menu-item relative flex items-center justify-start gap-4 cursor-pointer">
                    <div className="menu-icon">
                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                        <g clip-path="url(#clip0_14988_16008)">
-                         <path d="M18 8H17V6C17 3.24 14.76 1 12 1C9.24 1 7 3.24 7 6V8H6C4.9 8 4 8.9 4 10V20C4 21.1 4.9 22 6 22H18C19.1 22 20 21.1 20 20V10C20 8.9 19.1 8 18 8ZM9 6C9 4.34 10.34 3 12 3C13.66 3 15 4.34 15 6V8H9V6ZM17 20H7C6.45 20 6 19.55 6 19V11C6 10.45 6.45 10 7 10H17C17.55 10 18 10.45 18 11V19C18 19.55 17.55 20 17 20ZM12 17C13.1 17 14 16.1 14 15C14 13.9 13.1 13 12 13C10.9 13 10 13.9 10 15C10 16.1 10.9 17 12 17Z" fill="#A8A29E"/>
+                         <path d="M18 8H17V6C17 3.24 14.76 1 12 1C9.24 1 7 3.24 7 6V8H6C4.9 8 4 8.9 4 10V20C4 21.1 4.9 22 6 22H18C19.1 22 20 21.1 20 20V10C20 8.9 19.1 8 18 8ZM9 6C9 4.34 10.34 3 12 3C13.66 3 15 4.34 15 6V8H9V6ZM17 20H7C6.45 20 6 19.55 6 19V11C6 10.45 6.45 10 7 10H17C17.55 10 18 10.45 18 11V19C18 19.55 17.55 20 17 20ZM12 17C13.1 17 14 16.1 14 15C14 13.9 13.1 13 12 13C10.9 13 10 13.9 10 15C10 16.1 10.9 17 12 17Z" fill="black"/>
                        </g>
                        <defs>
                          <clipPath id="clip0_14988_16008">
@@ -190,11 +190,12 @@ return( <div className="slideout-left relative z-40" aria-labelledby="slide-over
                        </defs>
                      </svg>
                    </div>
-                   <div className="menu-name leading-6 font-normal gap-2">
+                   <div className="menu-name leading-6 font-normal gap-2 lg:hidden xl:block">
                      Vault
                    </div>
                  </div>
-
+                </Link>
+                
                  <div className="menu-item relative flex items-center justify-start gap-4 cursor-default text-gray-400">
                    <div className="menu-icon">
                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="20" viewBox="0 0 18 20" fill="none">
