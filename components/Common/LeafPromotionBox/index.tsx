@@ -1,8 +1,9 @@
 "use client"
+import Link from "next/link"
 
 const LeafPromoBox = ()=>{
     return(
-        <a href="https://tree.market/place/">
+        <Link href="/place">
         <div className="promo-container flex flex-col gap-3 bg-[#D2E7DB] rounded-2xl p-4 shadow-sm shadow-gray-400 cursor-pointer">
           {/* <!-- COMPONENT wallet address --> */}
           <div className="promo-title flex justify-between items-center gap-4">
@@ -19,7 +20,7 @@ const LeafPromoBox = ()=>{
             </div>
           </div>
         </div>{/* <!-- promo-container donate --> */}
-        </a>
+        </Link>
     )
 }
 

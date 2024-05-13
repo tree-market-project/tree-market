@@ -1,4 +1,5 @@
 "use client"
+import Link from "next/link";
 import { useRef,useEffect } from "react"
 
 const MenuLeftSlideout:React.FC<{setVisible:any}> = ({setVisible})=>{
@@ -82,7 +83,7 @@ return( <div className="slideout-left relative z-40" aria-labelledby="slide-over
              <div className="slideout-content grid gap-12 font-normal">
 
                <div className="menu-items grid gap-8">
-                 <a href="https://tree.market/place">
+                 <Link href="/place">
                  <div onClick={()=>setVisible(false)} className="menu-item relative flex items-center justify-start gap-4 cursor-pointer">
                    <div className="menu-icon">
                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -100,7 +101,7 @@ return( <div className="slideout-left relative z-40" aria-labelledby="slide-over
                      Home
                    </div>
                  </div>
-                 </a>
+                 </Link>
 
                  <div className="menu-item relative flex items-center justify-start gap-4 cursor-default text-gray-400">
                    <div className="menu-icon">
@@ -156,7 +157,7 @@ return( <div className="slideout-left relative z-40" aria-labelledby="slide-over
                    </div>
                  </div>
 
-                 <a href="https://tree.market/wallet"> 
+                 <Link href="/wallet"> 
           <div className="menu-item relative flex items-center justify-start gap-4 cursor-pointer">
             <div className="menu-icon">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -174,7 +175,7 @@ return( <div className="slideout-left relative z-40" aria-labelledby="slide-over
               Wallet
             </div>
           </div>
-          </a>
+          </Link>
 
                  <div className="menu-item relative flex items-center justify-start gap-4 cursor-default text-gray-400">
                    <div className="menu-icon">
