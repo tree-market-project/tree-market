@@ -138,6 +138,7 @@ const Slideout = () =>{
             </div>
           </div>
 
+          <Link href="profile">
           <div className="menu-item relative flex items-center justify-start gap-4 cursor-default text-gray-400">
             <div className="menu-icon">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -155,6 +156,7 @@ const Slideout = () =>{
               Profile
             </div>
           </div>
+          </Link>
 
           <div className="menu-item relative flex items-center justify-start gap-4 cursor-default text-gray-400">
             <div className="menu-icon">

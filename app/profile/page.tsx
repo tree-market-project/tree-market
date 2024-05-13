@@ -16,7 +16,7 @@ import RecoverFromHexModal from "@/components/Wallet/RecoverFromHexModal"
 import RecoverFromSeedModal from "@/components/Wallet/RecoverFromSeedModal"
 import RecoverFromDiskModal from "@/components/Wallet/RecoverFromDiskModal"
 import RenameWalletModal from "@/components/Wallet/RenameWalletModal"
-import LeftContent from "@/components/Vault/LeftContent"
+import LeftContent from "@/components/Profile/LeftContent"
 import AddTokenModal from "@/components/Vault/addTokenModal"
 import TokenSlideout from "@/components/Vault/TokenSlideout"
 import TransferModal from "@/components/Vault/TransferModal"
@@ -27,7 +27,7 @@ import RemoveTokenModal from "@/components/Vault/RemoveTokenModal"
 
 
 
-export default function Vault(){
+export default function Profile(){
 const [showFastRegModal,setShowFastRegModal] = useState(false)
 const [showEnterPassModal,setShowEnterPassModal] = useState(false)
 const [showRecoverFromHexModal,setShowRecoverFromHexModal] = useState(false)
@@ -55,7 +55,7 @@ const toasterRef = useRef<ToasterRef | null>(null)
 
 <div className="content-wrapper grid xl:w-5/6 h-dvh">
   {/* <!-- COMPONENT dApp Header --> */}
-  <DappHeader headerText={"Vault"}/>{/* <!-- dapp-header --> */}
+  <DappHeader headerText={"Profile"}/>{/* <!-- dapp-header --> */}
   <div className="relative lg:grid lg:grid-cols-5 xl:grid-cols-3 gap-4 mx-auto h-dvh w-full px-0 overflow-y-scroll lg:overflow-y-hidden scroller">
     {/* <!-- left-col --> */}
     <LeftColumn>
