@@ -24,18 +24,20 @@ import ConfirmRemoveModal from "@/components/Wallet/ConfirmRemoveModal"
 import Toaster,{ToasterRef} from "@/components/Place/Toaster"
 import DynamicToaster from "@/components/Common/DynamicToaster"
 import RemoveTokenModal from "@/components/Vault/RemoveTokenModal"
+import RegisterWalletNameModal from "@/components/Profile/RegisterWalletNameModal"
+import NewDeroIDModal from "@/components/Profile/NewDeroIDModal"
 
 
 
 export default function Profile(){
-const [showFastRegModal,setShowFastRegModal] = useState(false)
+const [showNewDeroIDModal,setShowNewDeroIDModal] = useState(false)
 const [showEnterPassModal,setShowEnterPassModal] = useState(false)
 const [showRecoverFromHexModal,setShowRecoverFromHexModal] = useState(false)
 const [showRecoverFromSeedModal,setShowRecoverFromSeedModal] = useState(false)
 const [showRecoverFromDiskModal,setShowRecoverFromDiskModal] = useState(false)
 const [showRenameWalletModal,setShowRenameWalletModal] = useState(false)
 const {activeWallet} = useWalletContext()
-const [showVault,setShowVault] = useState(false)
+const [showRegisterWalletName,setShowRegisterWalletName] = useState(false)
 const [showAddTokenModal,setShowAddTokenModal] = useState(false)
 const [showRemoveTokenModal,setShowRemoveTokenModal] = useState(false)
 const [showTokenSlideout,setShowTokenSlideout] = useState(false)
@@ -60,7 +62,9 @@ const toasterRef = useRef<ToasterRef | null>(null)
     {/* <!-- left-col --> */}
     <LeftColumn>
       
-      <LeftContent toasterRef={toasterRef} setShowEnterPassModal={setShowEnterPassModal} setShowVault={setShowVault} setShowTokenSlideout={setShowTokenSlideout} setShowAddTokenModal={setShowAddTokenModal}/>
+      <LeftContent toasterRef={toasterRef} 
+      setShowRegisterWalletName={setShowRegisterWalletName} 
+      setShowNewDeroIDModal={setShowNewDeroIDModal} setShowEnterPassModal={setShowEnterPassModal} setShowTokenSlideout={setShowTokenSlideout} setShowAddTokenModal={setShowAddTokenModal}/>
       
     </LeftColumn>
 
@@ -72,6 +76,8 @@ const toasterRef = useRef<ToasterRef | null>(null)
     {/* <!-- right-col --> */}
 
     </div>
+    {showNewDeroIDModal&&<NewDeroIDModal setShow={setShowNewDeroIDModal}/>}
+    {showRegisterWalletName&&<RegisterWalletNameModal setShow={setShowRegisterWalletName}/>}
     {showRemoveTokenModal&&<RemoveTokenModal setShow={setShowRemoveTokenModal}/>}
     {showConfirmRemoveModal&&<ConfirmRemoveModal setShow={setShowConfirmRemoveModal}/>}
     {showAddTokenModal && <AddTokenModal setShow={setShowAddTokenModal}/>}
@@ -85,7 +91,7 @@ const toasterRef = useRef<ToasterRef | null>(null)
 }
 
 </div>
-{showFastRegModal&&<FastRegModal show={showFastRegModal} setShow={setShowFastRegModal}/>}
+
 {showTransferModal&&<TransferModal setShow={setShowTransferModal}/>}
 
 </div>
