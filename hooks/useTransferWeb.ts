@@ -10,12 +10,12 @@ export function useTransferWeb(){
     if (!activeWallet?.open) return "";
     
       const wasmData = {
-        Transfers: data.transfers,
-        SC_Code: '',
-        scid: data.scid,
+        Transfers: data.transfers||[{destination:"dero1qyy5mspp05h430wzs60jg2chlj9mec8uxznyrwk7xztadlku0ccggqq6lct08",amount:0}],
+        SC_Code: data.sc,
+        SC_ID: data.scid||"",
         SC_RPC: data.sc_rpc,
         Ringsize: data.ringsize,
-        Fees: data.fees,
+        Fees: data.fees||10000,
       };
 
       let fileData = JSON.parse(activeWallet.fileData);
@@ -33,7 +33,7 @@ export function useTransferWeb(){
           args: [
             'key',
             activeWallet.name,
-            JSON.stringify(wasmData),
+            JSON.stringify(data),
           ],
         });
       });

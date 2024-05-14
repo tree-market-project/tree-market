@@ -31,10 +31,11 @@ async function getToken(scid:string){
       });
 
          if (!response.ok) {
-        throw new Error('Failed to fetch invoices');
+        throw new Error('Failed to fetch token data');
       }
      console.log("response",response)
       const data = await response.json();
+      console.log("response json",data)
       let decimals = 0
       if(data.result.stringkeys.decimals){
         decimals = data.result.stringkeys.decimals

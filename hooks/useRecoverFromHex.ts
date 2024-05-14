@@ -17,6 +17,7 @@ export function useRecoverFromHex(){
             args: [password,hex]
           });
         });
+        console.log("walletInfo",walletInfo)
         const arrayBuffer = new Uint8Array(walletInfo.value.fileData).slice();
       const decoder = new TextDecoder();
       const jsonString = decoder.decode(arrayBuffer);

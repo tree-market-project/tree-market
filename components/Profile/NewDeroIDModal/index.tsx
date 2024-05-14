@@ -1,6 +1,13 @@
 "use client"
+import { useMintDeroID } from "@/hooks/useMintDeroID"
 
 const NewDeroIDModal:React.FC<{setShow:any}>=({setShow})=>{
+    const mintDeroID = useMintDeroID()
+
+    const handleMint = async()=>{
+        const txid = await mintDeroID()
+        console.log("txid",txid)
+    }
     return(
     <dialog open id="my_modal_newderoid" className="z-50 modal bg-gray-100 rounded-lg ring-1 ring-gray-300 w-11/12 mx-auto max-w-screen-sm shadow-md shadow-gray-400">
     <div className="modal-box relative pb-4">
@@ -71,7 +78,7 @@ const NewDeroIDModal:React.FC<{setShow:any}>=({setShow})=>{
 
       {/* <!-- BTN state 1 --> */}
       <div className="register-name px-4 pb-4 md:px-6 md:pb-6 float-start">
-        <div className="flex gap-2 items-center bg-cyan-800 text-white px-4 py-2 rounded-md text-center text-sm sm:text-base cursor-pointer">
+        <div onClick={handleMint} className="flex gap-2 items-center bg-cyan-800 text-white px-4 py-2 rounded-md text-center text-sm sm:text-base cursor-pointer">
           <div className="icon">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
               <g clip-path="url(#clip0_15354_2482)">
