@@ -64,7 +64,7 @@ const toasterRef = useRef<ToasterRef | null>(null)
       
       <LeftContent toasterRef={toasterRef} 
       setShowRegisterWalletName={setShowRegisterWalletName} 
-      setShowNewDeroIDModal={setShowNewDeroIDModal} setShowEnterPassModal={setShowEnterPassModal} setShowTokenSlideout={setShowTokenSlideout} setShowAddTokenModal={setShowAddTokenModal}/>
+      setShowNewDeroIDModal={setShowNewDeroIDModal}  />
       
     </LeftColumn>
 

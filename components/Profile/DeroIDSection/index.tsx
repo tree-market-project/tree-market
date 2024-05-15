@@ -26,7 +26,7 @@ const DeroIDSection:React.FC<{setShowNewDeroIDModal:any}>=({setShowNewDeroIDModa
                     <div className="deroids-container grid sm:grid-cols-2 gap-4">
 
                       {/* <!-- deroid-single registered --> */}
-                      {activeWallet?.balances.filter(token=>token.symbol=="deroID").map(token=><DeroIDCard scid={token.scid}/>
+                      {activeWallet?.balances.filter(token=>token.symbol=="deroID").map((token,index)=><DeroIDCard key={index} scid={token.scid}/>
 )}
                       
                       

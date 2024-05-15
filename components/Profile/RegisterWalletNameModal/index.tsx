@@ -32,7 +32,7 @@ const RegisterWalletNameModal:React.FC<{setShow:any}> = ({setShow})=>{
         </div>{/* <!-- notification.info --> */}
 
         <div className="input-walletname relative grid items-center px-2 py-2 shadow-inner shadow-gray-400 ring-1 ring-gray-900/5 mx-auto w-full rounded-lg">
-          <label for="newname" className="text-sm font-semibold px-2">Wallet Name</label>
+          <label htmlFor="newname" className="text-sm font-semibold px-2">Wallet Name</label>
           <input type="text" name="newname" id="newname" placeholder="ex: TreeMarket" className="py-1 text-base bg-transparent focus:border-none focus:ring-0 focus:ring-inset px-2"/>
         </div>{/* <!-- input-walletname --> */}
 
