@@ -2,6 +2,9 @@ Function Initialize() Uint64
 10 IF EXISTS("OWNER") THEN GOTO 90
 20 STORE("OWNER",ADDRESS_STRING(SIGNER()))
 30 SEND_ASSET_TO_ADDRESS(SIGNER(),1,SCID())
+40 STORE("name","DeroID")
+50 STORE("symbol","DeroID")
+60 STORE("decimals",0)
 90 RETURN 0
 End Function
 

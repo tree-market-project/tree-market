@@ -29,7 +29,7 @@ const DappHeader:React.FC<{headerText:string}> = ({headerText})=>{
        </>
     :headerText=="Profile"?
     <>
-    <div className="menu-icon px-4 py-2 cursor-pointer justify-self-start text-4xl lg:hidden">&#8801;</div>
+    <div onClick={()=>setMenuVisible(true)} className="menu-icon px-4 py-2 cursor-pointer justify-self-start text-4xl lg:hidden">&#8801;</div>
         <div className="menu-icon px-4 py-2 cursor-pointer justify-self-start text-4xl hidden lg:block">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
             <g clip-path="url(#clip0_14988_22383)">

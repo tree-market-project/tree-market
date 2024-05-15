@@ -20,8 +20,33 @@ const LeftContent:React.FC<{setShowNewDeroIDModal:any,setShowRegisterWalletName:
               </div>{/* <!-- content-title --> */}
 
               <div className="description relative">
-                <p>View your private assets held in your Dero wallet.</p>
+              <p>Secure your identity across dApps by registering it to your DeroID. Add metadata such as image, description, website, social links, or anything else unique to you.</p>
+                <p>Nameservice allows you to give your Dero wallet a name. This utility is free thanks to Captain. This name can be used in place of your address when accepting payments.</p>
               </div>{/* <!-- description --> */}
+
+              <div className="nameservice-select grid gap-4 grid-cols-2">
+                <div onClick={()=>setView("deroid")} className={`nameservice-tile relative flex items-center justify-between gap-2 w-full ${view=="deroid"?"bg-[#b8dbc6]":"bg-gray-100"} px-4 py-4 mx-auto rounded-lg shadow-sm shadow-gray-400 text-gray-700 cursor-pointer hover:shadow-inner hover:shadow-gray-300`}>
+                  <div className="nameservice-info flex items-center gap-2">
+                    <div className="name">
+                      <div className="item-name font-medium">DeroID</div>
+                    </div>
+                  </div>{/* <!-- nameservice-info --> */}
+                  <div className="icon">
+                    <img src="https://digitalbanjare.com/img/wallet/deroweb-icon.png" className="w-[24px] mx-auto" />
+                  </div>{/* <!-- icon --> */}
+                </div>{/* <!-- nameservice-tile deroweb --> */}
+
+                <div onClick={()=>setView("nameservice")} className={`nameservice-tile relative flex items-center justify-between gap-2 w-full ${view=="nameservice"?"bg-[#b8dbc6]":"bg-gray-100"} px-4 py-4 mx-auto rounded-lg shadow-sm shadow-gray-400 text-gray-700 cursor-pointer hover:shadow-inner hover:shadow-gray-300`}>
+                  <div className="nameservice-info flex items-center gap-2">
+                    <div className="name">
+                      <div className="item-name font-medium">Nameservice</div>
+                    </div>
+                  </div>{/* <!-- nameservice-info --> */}
+                  <div className="icon">
+                    <img src="https://tree.market/images/currency-icons/dero-icon.png" className="w-[24px] mx-auto" />
+                  </div>{/* <!-- icon --> */}
+                </div>{/* <!-- wallet-tile captain --> */}
+              </div>{/* <!-- nameservice-select --> */}
 
               <div className="how-to grid gap-4">
 

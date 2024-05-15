@@ -156,3 +156,14 @@ export type balance = {
   decimals?:number;
   symbol?:string;
 }
+
+export type DeroID = {
+  names?: string[];
+  scid:string;
+  website?:string;
+  address?:string;
+  reputation?:number;
+  registered?:boolean;
+  description?:string;
+  image?:string;
+}
