@@ -162,12 +162,19 @@ const Trade:React.FC<{column:string}> = ({column})=>{
                   </div>{/* <!-- crypto-total --> */}
                 </div>{/* <!-- select-method --> */}
 
-                <div onClick={()=>handleCopy("address")} className={`deposit-address-btn relative px-2 py-3 mx-auto w-full rounded-2xl ${checkoutStep==2?"bg-cyan-700 text-gray-200 cursor-pointer":"bg-[#155E7560] text-gray-100 cursor-default"} text-center leading-tight`}>
+                {invoice.SeedID?<div onClick={()=>handleCopy("address")} className={`deposit-address-btn relative px-2 py-3 mx-auto w-full rounded-2xl ${checkoutStep==2?"bg-cyan-700 text-gray-200 cursor-pointer":"bg-[#155E7560] text-gray-100 cursor-default"} text-center leading-tight`}>
                   <div className="text-sm px-2">Tap To Copy Deposit Address</div>
                   <div className="send-address text-sm py-1 px-2 break-all">
                   {invoice.Payments?.find(x=>x.symbol.toLowerCase()==selectedCurrency.symbol.toLowerCase()&&x.currency.toLowerCase() == selectedCurrency.currency.toLowerCase())?.payment_address}
                   </div>
-                </div>{/* <!-- deposit-address-btn --> */}
+                </div>
+                :
+                <div className="preparing-address-btn relative px-2 py-3 mx-auto w-full rounded-2xl bg-cyan-700 text-gray-200 text-center leading-tight cursor-pointer">
+                  <div className="preparing-address-amount text-sm py-1 px-2">
+                    Preparing deposit address and amount to be sent<span className="animate-ping">...</span>
+                  </div>
+                </div>
+                }{/* <!-- deposit-address-btn --> */}
 
                 <div onClick={()=>handleCopy("amount")} className={`deposit-amt-btn relative px-2 py-3 mx-auto w-full rounded-2xl ${checkoutStep==2?"bg-cyan-700 text-gray-200 cursor-pointer":"bg-[#155E7560] text-gray-100 cursor-default"} text-center leading-tight`}>
                   <div className="text-sm px-2">Tap To Copy Total To Be Sent</div>
@@ -177,7 +184,7 @@ const Trade:React.FC<{column:string}> = ({column})=>{
                 </div>{/* <!-- deposit-amt-btn --> */}
                 <div className={`${checkoutStep==4?'hidden ':''} qrcode grid gap-2 bg-gray-200 p-6 sm:p-8 rounded-2xl`}>
   <h4 className="text-center text-sm md:text-base">Scan QR</h4>
-  <div className="qr bg-white mx-auto w-auto max-w-[260px] p-4 rounded-xl">
+  <div className={`qr bg-white mx-auto w-auto max-w-[260px] p-4 rounded-xl ${!invoice.SeedID&&"animate-pulse"}`}>
      <QRCode value={invoice.Payments?.find(x=>x.symbol.toLowerCase()==selectedCurrency.symbol.toLowerCase()&&x.currency.toLowerCase() == selectedCurrency.currency.toLowerCase())?.payment_url||""} size={200} renderAs="svg"/> 
   </div>  
 </div>
