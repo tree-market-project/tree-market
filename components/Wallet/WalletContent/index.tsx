@@ -529,7 +529,7 @@ const WalletContent:React.FC<{toasterRef:any,setShowConfirmRemoveModal:any,setSh
 
                           <p>c. Otherwise you can use http://tree.market:10102 or any remote node you like.</p>
 
-                          <p>d. For wallet RPC put 127.0.0.1:10103.</p>
+                          <p>d. For wallet RPC put http://127.0.0.1:10103.</p>
 
                           <p>e. Under RPC Login paste the credentials you copied from engram.</p>
 
