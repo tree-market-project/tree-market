@@ -159,6 +159,7 @@ export type balance = {
 
 export type DeroID = {
   names?: string[];
+  registeredNames?: string[];
   scid:string;
   website?:string;
   address?:string;

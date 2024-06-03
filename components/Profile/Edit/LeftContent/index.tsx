@@ -1,6 +1,22 @@
 "use client"
+import { useEditDeroID } from "@/hooks/useEditDeroID"
+import { useSearchParams } from "next/navigation"
+import { useState } from "react"
 
 const LeftContent:React.FC<{setShowRegisterDeroIDModal:any}> = ({setShowRegisterDeroIDModal})=>{
+  const editDeroID = useEditDeroID()
+  const searchParams = useSearchParams()
+  const scidParam = searchParams.get("scid")
+  const scid = Array.isArray(scidParam)?scidParam[0]:scidParam||''
+  const [image,setImage] = useState("")
+
+  const handleChangeImage = (e:any)=>{
+    setImage(e.target.value)
+  }
+
+  const handleSave = async ()=>{
+    const txid = await editDeroID("image_url",image,"S",scid)
+  }
     return(
         <div className="profile-content">
         {/* <!-- COMPONENT Content Container --> */}
@@ -39,7 +55,7 @@ const LeftContent:React.FC<{setShowRegisterDeroIDModal:any}> = ({setShowRegister
                         </defs>
                       </svg>
                     </div>
-                    <div className="text-xs border border-gray-600 px-4 py-1 rounded-md cursor-pointer text-center shadow-sm shadow-gray-400 hover:shadow-inner" onclick="my_modal_changewallet.showModal()">Change</div>
+                    <div className="text-xs border border-gray-600 px-4 py-1 rounded-md cursor-pointer text-center shadow-sm shadow-gray-400 hover:shadow-inner">Change</div>
                   </div>
                 </div>
                 <div className="address flex justify-between items-center gap-4">
@@ -74,7 +90,7 @@ const LeftContent:React.FC<{setShowRegisterDeroIDModal:any}> = ({setShowRegister
                                         
                   <div className="input-deroid-img relative grid items-center px-2 py-2 bg-gray-50 shadow-inner shadow-gray-400 ring-1 ring-gray-900/5 mx-auto w-full rounded-lg">
                     <label htmlFor="didimg" className="text-sm font-semibold px-2">Image</label>
-                    <input type="text" name="didimg" id="didimg" placeholder="https://imageurl.website" className="py-1 text-sm sm:text-base bg-transparent focus:border-none focus:ring-0 focus:ring-inset px-2"/>
+                    <input value={image} onChange={handleChangeImage} type="text" name="didimg" id="didimg" placeholder="https://imageurl.website" className="py-1 text-sm sm:text-base bg-transparent focus:border-none focus:ring-0 focus:ring-inset px-2"/>
                   </div>{/* <!-- input-deroid-img --> */}
 
                   <div className="input-deroid-bio relative grid items-center px-2 py-2 bg-gray-50 shadow-inner shadow-gray-400 ring-1 ring-gray-900/5 mx-auto w-full rounded-lg">
@@ -233,7 +249,7 @@ const LeftContent:React.FC<{setShowRegisterDeroIDModal:any}> = ({setShowRegister
                     </div>{/* <!-- input-shipaddress1 --> */}
 
                     <div className="input-shipaddress2 relative grid items-center px-2 py-2 bg-gray-50 shadow-inner shadow-gray-400 ring-1 ring-gray-900/5 mx-auto w-full rounded-lg">
-                      <label for="shipaddress2" className="text-sm font-semibold px-2">Address Line 2</label>
+                      <label htmlFor="shipaddress2" className="text-sm font-semibold px-2">Address Line 2</label>
                       <input type="text" name="shipaddress2" id="shipaddress2" placeholder="" className="py-1 text-sm sm:text-base bg-transparent focus:border-none focus:ring-0 focus:ring-inset px-2"/>
                     </div>{/* <!-- input-shipaddress2 --> */}
 
@@ -244,12 +260,12 @@ const LeftContent:React.FC<{setShowRegisterDeroIDModal:any}> = ({setShowRegister
 
                     <div className="grid sm:grid-cols-2 gap-4">
                       <div className="input-shipstate relative grid items-center px-2 py-2 bg-gray-50 shadow-inner shadow-gray-400 ring-1 ring-gray-900/5 mx-auto w-full rounded-lg">
-                        <label for="shipstate" className="text-sm font-semibold px-2">State/Province</label>
+                        <label htmlFor="shipstate" className="text-sm font-semibold px-2">State/Province</label>
                         <input type="text" name="shipstate" id="shipstate" placeholder="" className="py-1 text-sm sm:text-base bg-transparent focus:border-none focus:ring-0 focus:ring-inset px-2"/>
                       </div>{/* <!-- input-shipstate --> */}
 
                       <div className="input-shipzipcode relative grid items-center px-2 py-2 bg-gray-50 shadow-inner shadow-gray-400 ring-1 ring-gray-900/5 mx-auto w-full rounded-lg">
-                        <label for="shipzipcode" className="text-sm font-semibold px-2">Zip/Postal Code</label>
+                        <label htmlFor="shipzipcode" className="text-sm font-semibold px-2">Zip/Postal Code</label>
                         <input type="text" name="shipzipcode" id="shipzipcode" placeholder="" className="py-1 text-sm sm:text-base bg-transparent focus:border-none focus:ring-0 focus:ring-inset px-2"/>
                       </div>{/* <!-- input-shipzipcode --> */}
                     </div>
@@ -266,7 +282,7 @@ const LeftContent:React.FC<{setShowRegisterDeroIDModal:any}> = ({setShowRegister
 
                 <hr />
 
-                <div className="btn grid text-center items-center bg-[#3E7A57] rounded-md h-[64px] cursor-pointer">
+                <div onClick={handleSave} className="btn grid text-center items-center bg-[#3E7A57] rounded-md h-[64px] cursor-pointer">
                   <div className="text-lg text-gray-50">Save Details</div>
                 </div>
               </div>{/* <!-- deroiddetails --> */}

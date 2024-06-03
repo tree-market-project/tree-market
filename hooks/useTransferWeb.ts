@@ -3,10 +3,14 @@ import { useWalletContext } from "@/contexts";
 
 
 export function useTransferWeb(){
-  const {activeWallet} = useWalletContext()
+  const {activeWallet,worker} = useWalletContext()
+  const backupWorker = worker
 
-  const transferWeb = async (worker:Worker,data:any):Promise<string> => {
+  const transferWeb = async (worker:Worker|undefined|null,data:any):Promise<string> => {
     let txid=""
+    if(!worker){
+      worker = backupWorker
+    }
     if (!activeWallet?.open) return "";
     
       const wasmData = {

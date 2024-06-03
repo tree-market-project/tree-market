@@ -2,12 +2,13 @@
 
 import { DeroID } from "@/types";
 import hex2a from "@/utils/hex2a";
+import getDNSRegistry from "./getDNSRegistry";
 
 
 
 async function getDeroID(scid:string){
 
-  let id:DeroID = {scid:scid}
+  let id:DeroID = {scid:scid,registeredNames:[]}
 
     const getTokenData = {
         "jsonrpc": "2.0",
@@ -19,6 +20,8 @@ async function getDeroID(scid:string){
             "variables":true
         }
     }
+
+    
   
   
   
@@ -69,15 +72,33 @@ async function getDeroID(scid:string){
 
       }
 
+      const registry = await getDNSRegistry()
+      const keys = Object.keys(registry);
+
+      // Iterate over the keys to find the matching data value
+      for (let key of keys) {
+        if (key.startsWith("data:")) {
+          
+          const name = key.split(":")[1];
+          console.log(key,name,scid,hex2a(registry[key]))
+          if (hex2a(registry[key]) === scid) {
+            id.registeredNames?.push(name)
+          }
+        }
+      }
+
+      if(id.registeredNames?.length){
+        id.registered=true 
+      }
       
-      
+      console.log("deroID: ",id)
      
       
       return id
 
      
     } catch (error) {
-      console.error('Error submitting form:', error);
+      console.error('Error fetching token:', error);
       return(JSON.stringify(error))
     }
   }

@@ -48,7 +48,7 @@ const DeroIDCard:React.FC<{scid:string}> = ({scid})=>{
           </div>
         </div>
         <div className="deroid-name text-lg font-semibold">
-          {id.names?.[0]}
+          {id.registeredNames? id.registeredNames[0] : id.names?[0]:"DeroID"}
         </div>
         <div className="flex flex-col gap-4">
           <div className="contact-details grid gap-1">

@@ -14,9 +14,7 @@ export function useTransfer(){
     console.log("transfer ",activeWallet?.connection,data,worker,deroBridgeApiRef)
     switch(activeWallet?.connection){
       case "web":
-        if(!worker){
-          return ""
-        }
+        
         return await transferWeb(worker,data)
       case "rpc":
         return await transferRPC(data,deroBridgeApiRef)
