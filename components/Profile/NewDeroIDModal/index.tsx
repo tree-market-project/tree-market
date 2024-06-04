@@ -1,11 +1,16 @@
 "use client"
 import { useMintDeroID } from "@/hooks/useMintDeroID"
+import { useState } from "react"
 
 const NewDeroIDModal:React.FC<{setShow:any}>=({setShow})=>{
     const mintDeroID = useMintDeroID()
+    const [step,setStep] = useState(0)
+    const [txid,setTXID] = useState("")
 
     const handleMint = async()=>{
+      setStep(1)
         const txid = await mintDeroID()
+        setTXID(txid)
         console.log("txid",txid)
     }
     return(
@@ -37,13 +42,13 @@ const NewDeroIDModal:React.FC<{setShow:any}>=({setShow})=>{
           </div>
           <div className="text-sm">DeroID is your cross-dAPP pseudonymous identity. You can add metadata such as image, description, website, or anything else. <u>All fields are optional.</u></div>
         </div>{/* <!-- notification.info --> */}
-
+{/* 
         <div className="input-deroid-img relative grid items-center px-2 py-2 shadow-inner shadow-gray-400 ring-1 ring-gray-900/5 mx-auto w-full rounded-lg">
           <label htmlFor="didimg" className="text-sm font-semibold px-2">Image</label>
           <input type="text" name="didimg" id="didimg" placeholder="https://imageurl.website" className="py-1 text-sm sm:text-base bg-transparent focus:border-none focus:ring-0 focus:ring-inset px-2"/>
-        </div>{/* <!-- input-deroid-img --> */}
+        </div>*/}{/* <!-- input-deroid-img --> */}
 
-        <div className="input-deroid-bio relative grid items-center px-2 py-2 shadow-inner shadow-gray-400 ring-1 ring-gray-900/5 mx-auto w-full rounded-lg">
+        {/* <div className="input-deroid-bio relative grid items-center px-2 py-2 shadow-inner shadow-gray-400 ring-1 ring-gray-900/5 mx-auto w-full rounded-lg">
           <div className="flex items-center justify-between gap-2 pb-2">
             <label htmlFor="didbio" className="text-sm font-semibold px-2">Bio</label>
             <div className="flex items-center rounded-full text-xs shadow-sm shadow-gray-400">
@@ -52,7 +57,7 @@ const NewDeroIDModal:React.FC<{setShow:any}>=({setShow})=>{
             </div>
           </div>
           <textarea name="didbio" id="didbio" placeholder="Add a description about this DeroID." className="py-1 text-sm sm:text-base bg-transparent focus:border-none focus:ring-0 focus:ring-inset px-2 h-28"></textarea>
-        </div>{/* <!-- input-deroid-bio --> */}
+        </div>  */}{/* <!-- input-deroid-bio --> */}
 
         <div className="txfee grid gap-3 px-2 py-1 border-l-4 border-cyan-800">
           <div className="amount flex flex-wrap items-center justify-between gap-2">
@@ -64,20 +69,20 @@ const NewDeroIDModal:React.FC<{setShow:any}>=({setShow})=>{
           <div className="tx-fee flex flex-wrap items-center justify-between gap-2">
             <div className="font-medium text-sm">Network Fee</div>
             <div className="text-sm text-right">
-              0.00080 DERO
+            0.02065 DERO
             </div>
           </div>
           <div className="swapinfo w-full flex items-center justify-between gap-2">
             <div className="font-bold">You will send</div>
             <div>&#8594;</div>
-            <div className="font-bold text-right">0.00080 DERO</div>
+            <div className="font-bold text-right">0.02065 DERO</div>
           </div>
         </div>
 
       </div>{/* <!-- modal_content --> */}
 
       {/* <!-- BTN state 1 --> */}
-      <div className="register-name px-4 pb-4 md:px-6 md:pb-6 float-start">
+     {step==0&& <div className="register-name px-4 pb-4 md:px-6 md:pb-6 float-start">
         <div onClick={handleMint} className="flex gap-2 items-center bg-cyan-800 text-white px-4 py-2 rounded-md text-center text-sm sm:text-base cursor-pointer">
           <div className="icon">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -93,10 +98,10 @@ const NewDeroIDModal:React.FC<{setShow:any}>=({setShow})=>{
           </div>
           <div>Mint DeroID</div>
         </div>
-      </div>
+      </div>}
 
       {/* <!-- BTN state 2 --> */}
-      <div className="send-tx px-4 pb-4 md:px-6 md:pb-6 float-start">
+      {step == 1 && !txid&&<div className="send-tx px-4 pb-4 md:px-6 md:pb-6 float-start">
         <div className="flex gap-2 items-center bg-cyan-800 bg-opacity-50 text-white px-4 py-2 rounded-md text-center text-sm sm:text-base cursor-wait">
           <div className="icon animate-pulse">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -112,10 +117,10 @@ const NewDeroIDModal:React.FC<{setShow:any}>=({setShow})=>{
           </div>
           <div>Sending Transaction</div>
         </div>
-      </div>
+      </div>}
 
       {/* <!-- BTN state 3 --> */}
-      <div className="tx-confirmed px-4 pb-4 md:px-6 md:pb-6 float-start">
+      {step==1&&txid&&<a href={`https://explorer.dero.io/tx/${txid}`} target="_blank" className="tx-confirmed px-4 pb-4 md:px-6 md:pb-6 float-start">
         <div className="flex gap-2 items-center bg-cyan-800 text-white px-4 py-2 rounded-md text-center text-sm sm:text-base cursor-pointer">
           <div className="icon">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -124,7 +129,7 @@ const NewDeroIDModal:React.FC<{setShow:any}>=({setShow})=>{
           </div>
           <div>View On Block Explorer</div>
         </div>
-      </div>
+      </a>}
 
     </div>{/* <!-- modal-box --> */}
   </dialog>)
