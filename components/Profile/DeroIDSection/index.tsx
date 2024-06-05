@@ -1,10 +1,11 @@
 "use client"
 
 import DeroIDCard from "../DeroIDCard"
-import { useWalletContext } from "@/contexts"
+import { useWalletContext,useProfileContext } from "@/contexts"
 
 const DeroIDSection:React.FC<{setShowNewDeroIDModal:any}>=({setShowNewDeroIDModal})=>{
   const {activeWallet} = useWalletContext()
+  const {profiles} = useProfileContext()
     return(
         <div className="deroid relative grid gap-4 bg-white w-full mx-auto rounded-lg p-4 shadow-sm shadow-gray-400">     
                     <div className="flex items-center justify-between gap-4">
@@ -26,8 +27,11 @@ const DeroIDSection:React.FC<{setShowNewDeroIDModal:any}>=({setShowNewDeroIDModa
                     <div className="deroids-container grid sm:grid-cols-2 gap-4">
 
                       {/* <!-- deroid-single registered --> */}
-                      {activeWallet?.balances.filter(token=>token.symbol=="deroID").map((token,index)=><DeroIDCard key={index} scid={token.scid}/>
-)}
+                      
+                      {profiles.filter(profile=>profile.address==activeWallet?.address).map((profile,index)=><DeroIDCard key={index} scid={profile.scid}/>)}
+
+                      {/*activeWallet?.balances.filter(token=>token.symbol=="deroID").map((token,index)=><DeroIDCard key={index} scid={token.scid}/>
+)*/}
                       
                       
 

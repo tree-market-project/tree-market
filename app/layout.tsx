@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 //import { Inter } from "next/font/google";
 import "./globals.css";
-import { CheckoutProvider,FastRegistrationProvider,WalletProvider } from "@/contexts";
+import { CheckoutProvider,FastRegistrationProvider,ProfileProvider,WalletProvider } from "@/contexts";
 import { VaultProvider } from "@/contexts/VaultContext";
 
 //const inter = Inter({ subsets: ["latin"] });
@@ -43,7 +43,7 @@ export default function RootLayout({
           }}
         /> */}
   </head>
-      <body><WalletProvider><VaultProvider><FastRegistrationProvider><CheckoutProvider>{children}</CheckoutProvider></FastRegistrationProvider></VaultProvider></WalletProvider></body>
+      <body><WalletProvider><ProfileProvider><VaultProvider><FastRegistrationProvider><CheckoutProvider>{children}</CheckoutProvider></FastRegistrationProvider></VaultProvider></ProfileProvider></WalletProvider></body>
     </html>
   );
 }

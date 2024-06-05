@@ -1,12 +1,13 @@
 "use client"
-import { wallet } from "@/types"
+import { DeroID, wallet } from "@/types"
 import { useTransfer } from "./useTransfer"
-import { useWalletContext } from "@/contexts"
+import { useWalletContext,useProfileContext } from "@/contexts"
 
 
 export function useMintDeroID(){
     const transfer = useTransfer()
     const {worker,activeWallet,setActiveWallet,walletList,setWalletList} = useWalletContext()
+    const {profiles,setProfiles} = useProfileContext()
 
     const mintDeroID = async()=>{
         const response = await fetch('/contracts/deroID.bas');
@@ -21,10 +22,19 @@ export function useMintDeroID(){
         let newList = walletList
         walletList[index] = newWallet
         setWalletList(newList)
-        let storedWallet =JSON.parse(JSON.stringify(newWallet))
+        if(activeWallet?.app == "web"){
+            let storedWallet =JSON.parse(JSON.stringify(newWallet))
         storedWallet.open= false
         storedWallet.active=false
         localStorage.setItem(`wallet-${newWallet.name}`,JSON.stringify(storedWallet))
+        }
+
+        let newProfile:DeroID = {address:activeWallet?.address,scid:txid}
+        let newProfiles = profiles
+        newProfiles.push(newProfile)
+        setProfiles(newProfiles)
+        localStorage.setItem(`profile-${txid}`, JSON.stringify(newProfile))
+        
         return txid;
     }
 

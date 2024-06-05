@@ -90,6 +90,13 @@ export type VaultContextType = {
   setSelectedToken: (token:balance)=>void;
 }
 
+export type ProfileContextType = {
+  profiles:DeroID[];
+  setProfiles: (profile:DeroID[])=>void;
+  activeProfile: (DeroID|null);
+  setActiveProfile: (profile:DeroID)=>void;
+}
+
 export type FastRegistrationContextType = {
   workerCount: number;
   setWorkerCount: (count:number)=>void;
