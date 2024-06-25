@@ -16,7 +16,7 @@ import RecoverFromHexModal from "@/components/Wallet/RecoverFromHexModal"
 import RecoverFromSeedModal from "@/components/Wallet/RecoverFromSeedModal"
 import RecoverFromDiskModal from "@/components/Wallet/RecoverFromDiskModal"
 import RenameWalletModal from "@/components/Wallet/RenameWalletModal"
-import LeftContent from "@/components/Profile/Edit/LeftContent"
+import LeftContent from "@/components/Profile/Preview/LeftContent"
 import AddTokenModal from "@/components/Vault/addTokenModal"
 import TokenSlideout from "@/components/Vault/TokenSlideout"
 import TransferModal from "@/components/Vault/TransferModal"
@@ -30,7 +30,7 @@ import RegisterDeroIDModal from "@/components/Profile/RegisterDeroIDModal"
 
 
 
-export default function Edit(){
+export default function Preview(){
 const [showRegisterDeroIDModal,setShowRegisterDeroIDModal] = useState(false)
 const [showNewDeroIDModal,setShowNewDeroIDModal] = useState(false)
 const [showEnterPassModal,setShowEnterPassModal] = useState(false)
@@ -65,7 +65,7 @@ const toasterRef = useRef<ToasterRef | null>(null)
     <LeftColumn>
       
       <LeftContent
-      setShowRegisterDeroIDModal={setShowRegisterDeroIDModal} toasterRef={toasterRef} />
+      setShowRegisterDeroIDModal={setShowRegisterDeroIDModal}  />
       
     </LeftColumn>
 

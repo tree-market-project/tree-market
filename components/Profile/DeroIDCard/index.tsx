@@ -41,17 +41,17 @@ const DeroIDCard:React.FC<{scid:string}> = ({scid})=>{
                 <div className={id.reputation && id.reputation>4?"text-yellow-400":"text-gray-400"}>&#9733;</div>
               </div>
             </div>{/* <!-- deroidreputation --> */}
-            <div className="flex items-center gap-2 text-right">
+            {/* <div className="flex items-center gap-2 text-right">
               <div className="font-semibold">&#9906;</div>
               <div className="text-xs">New York, USA</div>
-            </div>
+            </div> */}
           </div>
         </div>
         <div className="deroid-name text-lg font-semibold">
           {id.registeredNames? id.registeredNames[0] : id.names?[0]:"DeroID"}
         </div>
         <div className="flex flex-col gap-4">
-          <div className="contact-details grid gap-1">
+          {/* <div className="contact-details grid gap-1">
             <div className="deroid-website text-sm flex items-center gap-1">
               <div className="w-[15px]">&#9741;</div>
               <div><a href="https://tree.market" target="_blank" className="text-[#3429a5]">https://tree.market</a></div>
@@ -64,13 +64,13 @@ const DeroIDCard:React.FC<{scid:string}> = ({scid})=>{
               <div className="w-[15px]">&#9990;</div>
               <div><a href="tel:+1 555 555-5555" target="_blank" className="text-[#3429a5]">+1 555 555-5555</a></div>
             </div>
-          </div>{/* <!-- contact-details --> */}
+          </div> */}{/* <!-- contact-details --> */}
           <div className="deroidbio text-sm space-y-2">
             {id.description}
           </div>{/* <!-- deroidbio --> */}
         </div>
         <hr />
-        <div className="deroidsocial-links relative w-full grid gap-1">
+        {/* <div className="deroidsocial-links relative w-full grid gap-1">
           <h4 className="text-xs font-semibold">Social Links</h4>
           <div className="flex flex-wrap items-center gap-3">
             <div className="text-xs bg-gray-200 px-3 py-2 rounded-md cursor-pointer hover:ring-1 hover:ring-gray-400">
@@ -92,7 +92,7 @@ const DeroIDCard:React.FC<{scid:string}> = ({scid})=>{
               Phoenix
             </div>
           </div>
-        </div>{/* <!-- deroidsocial-links --> */}
+        </div> */}{/* <!-- deroidsocial-links --> */}
       </div>{/* <!-- deroid-info --> */}
       <div className="bottom-row grid gap-4">
         <hr />
