@@ -58,6 +58,9 @@ async function getDeroID(scid:string){
       if(data.result.stringkeys.nameHdr){
         id.names=[hex2a(data.result.stringkeys.nameHdr)]
       }
+      if(data.result.stringkeys.OWNER){
+        id.address=hex2a(data.result.stringkeys.OWNER)
+      }
       
       if(data.result.stringkeys.metadata){
         let metadata = JSON.parse(hex2a(data.result.stringkeys.metadata))

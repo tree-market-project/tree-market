@@ -74,8 +74,8 @@ const LeftContent:React.FC<{setShowNewDeroIDModal:any,setShowRegisterWalletName:
                     </div>
                     <p className="text-sm">Give your Dero wallet a name. This utility is free thanks to Captain. This name can be used in place of your address when accepting payments. You can have many.</p>
                     <p className="text-sm">Through DeroWeb you can now also use this as a .dero domain name.</p>
-                    <h4 className="font-semibold">Wallet Names</h4>
-                    <div className="dero-nameservice flex flex-col gap-4 max-h-60 overflow-y-scroll p-4 rounded-lg shadow-inner shadow-gray-400">
+                    <h4 className="hidden font-semibold">Wallet Names</h4>
+                    <div className="hidden dero-nameservice flex flex-col gap-4 max-h-60 overflow-y-scroll p-4 rounded-lg shadow-inner shadow-gray-400">
                       <div className="single-item relative flex gap-4 px-3 py-3 ring-1 ring-gray-200 mx-auto w-full rounded-lg bg-gray-100 hover:bg-gray-200 leading-tight cursor-pointer">
                         <div className="font-medium">treemarket</div>
                       </div>{/* <!-- single-item --> */}

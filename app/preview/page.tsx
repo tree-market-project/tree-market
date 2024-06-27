@@ -64,8 +64,8 @@ const toasterRef = useRef<ToasterRef | null>(null)
     {/* <!-- left-col --> */}
     <LeftColumn>
       
-      <LeftContent
-      setShowRegisterDeroIDModal={setShowRegisterDeroIDModal}  />
+      <LeftContent toasterRef={toasterRef}
+        />
       
     </LeftColumn>
 

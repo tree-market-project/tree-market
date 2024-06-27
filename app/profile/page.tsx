@@ -30,6 +30,7 @@ import NewDeroIDModal from "@/components/Profile/NewDeroIDModal"
 
 
 export default function Profile(){
+
 const [showNewDeroIDModal,setShowNewDeroIDModal] = useState(false)
 const [showEnterPassModal,setShowEnterPassModal] = useState(false)
 const [showRecoverFromHexModal,setShowRecoverFromHexModal] = useState(false)
@@ -64,7 +65,7 @@ const toasterRef = useRef<ToasterRef | null>(null)
       
       <LeftContent toasterRef={toasterRef} 
       setShowRegisterWalletName={setShowRegisterWalletName} 
-      setShowNewDeroIDModal={setShowNewDeroIDModal}  />
+      setShowNewDeroIDModal={setShowNewDeroIDModal} />
       
     </LeftColumn>
 
@@ -76,6 +77,7 @@ const toasterRef = useRef<ToasterRef | null>(null)
     {/* <!-- right-col --> */}
 
     </div>
+    
     {showNewDeroIDModal&&<NewDeroIDModal setShow={setShowNewDeroIDModal}/>}
     {showRegisterWalletName&&<RegisterWalletNameModal setShow={setShowRegisterWalletName}/>}
     {showRemoveTokenModal&&<RemoveTokenModal setShow={setShowRemoveTokenModal}/>}

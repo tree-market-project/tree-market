@@ -3,20 +3,26 @@ import ActiveWalletBox from "@/components/Wallet/ActiveWalletBox"
 import { useEditDeroID } from "@/hooks/useEditDeroID"
 import { useSearchParams } from "next/navigation"
 import { useState } from "react"
+import { useProfileContext } from "@/contexts"
+import { DeroID } from "@/types"
 
-const LeftContent:React.FC<{setShowRegisterDeroIDModal:any,toasterRef:any}> = ({setShowRegisterDeroIDModal,toasterRef})=>{
+const LeftContent:React.FC<{setShowSaveProfile:any,setShowRegisterDeroIDModal:any,toasterRef:any}> = ({setShowSaveProfile,setShowRegisterDeroIDModal,toasterRef})=>{
   const editDeroID = useEditDeroID()
   const searchParams = useSearchParams()
   const scidParam = searchParams.get("scid")
   const scid = Array.isArray(scidParam)?scidParam[0]:scidParam||''
   const [image,setImage] = useState("")
+  const {setNewDetails} = useProfileContext()
 
   const handleChangeImage = (e:any)=>{
     setImage(e.target.value)
   }
 
   const handleSave = async ()=>{
-    const txid = await editDeroID("image_url",image,"S",scid)
+    let newProfile:DeroID = {image:image,scid:scid}
+    setNewDetails(newProfile)
+    setShowSaveProfile(true)
+    //const txid = await editDeroID("image_url",image,"S",scid)
   }
     return(
         <div className="profile-content">

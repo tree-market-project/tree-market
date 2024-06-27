@@ -33,6 +33,8 @@ const initialProfileState:ProfileContextType={
     setActiveProfile:()=>{},
     profiles:profiles,
     setProfiles:()=>{},
+    newDetails:null,
+    setNewDetails:()=>{}
 
 }
 
@@ -52,13 +54,16 @@ type ProfileProviderProps = {
   export const ProfileProvider: React.FC<ProfileProviderProps> = ({ children }) => {
     const [activeProfile, setActiveProfile] = useState(initialProfileState.activeProfile);
     const [profiles,setProfiles] = useState(initialProfileState.profiles)
+    const [newDetails,setNewDetails] = useState(initialProfileState.newDetails)
    
   
     const contextValue: ProfileContextType = {
       profiles,
       setProfiles,
       activeProfile,
-      setActiveProfile
+      setActiveProfile,
+      newDetails,
+      setNewDetails
     };
   
     return (

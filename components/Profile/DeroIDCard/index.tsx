@@ -97,7 +97,7 @@ const DeroIDCard:React.FC<{scid:string}> = ({scid})=>{
       <div className="bottom-row grid gap-4">
         <hr />
         <div className="buttons flex items-center justify-between gap-4">
-          <div className="viewbtn w-full bg-[#3E7A57] text-white text-sm text-center px-4 py-2 shadow-sm shadow-gray-400 rounded-md cursor-pointer hover:shadow-inner hover:shadow-gray-400">View</div>
+          <Link href={`/preview?scid=${scid}`} className="viewbtn w-full bg-[#3E7A57] text-white text-sm text-center px-4 py-2 shadow-sm shadow-gray-400 rounded-md cursor-pointer hover:shadow-inner hover:shadow-gray-400">View</Link>
           <Link href={`/edit?scid=${scid}`} className="editbtn w-full bg-gray-200 text-sm text-center px-4 py-2 shadow-sm shadow-gray-400 rounded-md cursor-pointer hover:shadow-inner hover:shadow-gray-400">Edit</Link>
         </div>{/* <!-- buttons --> */}
       </div>{/* <!-- bottom-row --> */}

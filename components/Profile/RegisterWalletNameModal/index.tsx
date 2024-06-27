@@ -1,6 +1,55 @@
 "use client"
+import { useCheckDeroAddress } from "@/hooks/useCheckDeroAddress"
+import { useRef,ChangeEvent, useState } from "react"
+import { useRegisterWalletName } from "@/hooks/useRegisterWalletName"
 
 const RegisterWalletNameModal:React.FC<{setShow:any}> = ({setShow})=>{
+  const registerWalletName= useRegisterWalletName()
+  const checkDeroAddress = useCheckDeroAddress()
+  const [nameTaken,setNameTaken] = useState(false)
+  const [tooShort,setTooShort] = useState(false)
+  const [step,setStep] = useState(0)
+  const [txid,setTXID] = useState("")
+  const [name,setName] = useState("")
+
+  const handleNameChange = async(e:any)=>{
+    if(e.target.value.length<6){
+      setTooShort(true)
+    }else{
+      setTooShort(false)
+    }
+    let addressObj = await checkDeroAddress(e.target.value)
+    console.log(addressObj.registered)
+    setNameTaken(addressObj.registered)
+    setName(e.target.value)
+  }
+
+  const debounce = (func: Function, delay: number) => {
+    let timeoutId: ReturnType<typeof setTimeout> | null;
+  
+    return (...args: any[]) => {
+      clearTimeout(timeoutId!);
+      timeoutId = setTimeout(() => {
+        func.apply(null, args);
+      }, delay);
+    };
+  };
+
+  const debouncedHandleChangeAddress = useRef(debounce(handleNameChange, 300)).current;
+
+  const handleDestinationInput = (e: ChangeEvent<HTMLInputElement>) => {
+   
+    debouncedHandleChangeAddress(e);
+  };
+
+  const handleRegisterWalletName = async()=>{
+    setStep(1)
+    let txid = await registerWalletName(name)
+    setTXID(txid)
+  }
+
+
+
     return(
         <dialog open id="my_modal_newwalletname" className="z-50 modal bg-gray-100 rounded-lg ring-1 ring-gray-300 w-11/12 mx-auto max-w-screen-sm shadow-md shadow-gray-400">
     <div className="modal-box relative pb-4">
@@ -33,7 +82,9 @@ const RegisterWalletNameModal:React.FC<{setShow:any}> = ({setShow})=>{
 
         <div className="input-walletname relative grid items-center px-2 py-2 shadow-inner shadow-gray-400 ring-1 ring-gray-900/5 mx-auto w-full rounded-lg">
           <label htmlFor="newname" className="text-sm font-semibold px-2">Wallet Name</label>
-          <input type="text" name="newname" id="newname" placeholder="ex: TreeMarket" className="py-1 text-base bg-transparent focus:border-none focus:ring-0 focus:ring-inset px-2"/>
+          <input onChange={handleDestinationInput} type="text" name="newname" id="newname" placeholder="ex: TreeMarket" className="py-1 text-base bg-transparent focus:border-none focus:ring-0 focus:ring-inset px-2"/>
+          {nameTaken?<div className="text-sm text-red-600 px-4">Name already registered.</div>:""}
+          {tooShort?<div className="text-sm text-red-600 px-4">Name must be at least 6 characters .</div>:""}
         </div>{/* <!-- input-walletname --> */}
 
         <div className="txfee grid gap-3 px-2 py-1 border-l-4 border-cyan-800">
@@ -59,7 +110,7 @@ const RegisterWalletNameModal:React.FC<{setShow:any}> = ({setShow})=>{
       </div>{/* <!-- modal_content --> */}
 
       {/* <!-- BTN state 1 --> */}
-      <div className="register-name px-4 pb-4 md:px-6 md:pb-6 float-start">
+      {step==0&&<div onClick={handleRegisterWalletName} className="register-name px-4 pb-4 md:px-6 md:pb-6 float-start">
         <div className="flex gap-2 items-center bg-cyan-800 text-white px-4 py-2 rounded-md text-center text-sm sm:text-base cursor-pointer">
           <div className="icon">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -75,10 +126,10 @@ const RegisterWalletNameModal:React.FC<{setShow:any}> = ({setShow})=>{
           </div>
           <div>Register Wallet Name</div>
         </div>
-      </div>
+      </div>}
 
       {/* <!-- BTN state 2 --> */}
-      <div className="send-tx px-4 pb-4 md:px-6 md:pb-6 float-start">
+     { step==1&&!txid&&<div className="send-tx px-4 pb-4 md:px-6 md:pb-6 float-start">
         <div className="flex gap-2 items-center bg-cyan-800 bg-opacity-50 text-white px-4 py-2 rounded-md text-center text-sm sm:text-base cursor-wait">
           <div className="icon animate-pulse">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -94,10 +145,10 @@ const RegisterWalletNameModal:React.FC<{setShow:any}> = ({setShow})=>{
           </div>
           <div>Sending Transaction</div>
         </div>
-      </div>
+      </div>}
 
       {/* <!-- BTN state 3 --> */}
-      <div className="tx-confirmed px-4 pb-4 md:px-6 md:pb-6 float-start">
+     {step==1&&txid&& <a href={`https://explorer.dero.io/tx/${txid}`} target="_blank" className="tx-confirmed px-4 pb-4 md:px-6 md:pb-6 float-start">
         <div className="flex gap-2 items-center bg-cyan-800 text-white px-4 py-2 rounded-md text-center text-sm sm:text-base cursor-pointer">
           <div className="icon">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -106,7 +157,7 @@ const RegisterWalletNameModal:React.FC<{setShow:any}> = ({setShow})=>{
           </div>
           <div>View On Block Explorer</div>
         </div>
-      </div>
+      </a>}
 
     </div>{/* <!-- modal-box --> */}
   </dialog>

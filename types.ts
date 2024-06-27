@@ -95,6 +95,8 @@ export type ProfileContextType = {
   setProfiles: (profile:DeroID[])=>void;
   activeProfile: (DeroID|null);
   setActiveProfile: (profile:DeroID)=>void;
+  newDetails:(DeroID|null);
+  setNewDetails: (details:DeroID)=>void;
 }
 
 export type FastRegistrationContextType = {

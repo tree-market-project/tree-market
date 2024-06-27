@@ -27,10 +27,11 @@ import RemoveTokenModal from "@/components/Vault/RemoveTokenModal"
 import RegisterWalletNameModal from "@/components/Profile/RegisterWalletNameModal"
 import NewDeroIDModal from "@/components/Profile/NewDeroIDModal"
 import RegisterDeroIDModal from "@/components/Profile/RegisterDeroIDModal"
-
+import SaveProfileDetailsModal from "@/components/Profile/SaveProfileDetailsModal"
 
 
 export default function Edit(){
+    const [showSaveProfileDetailsModal,setShowSaveProfileDetailsModal] = useState(false)
 const [showRegisterDeroIDModal,setShowRegisterDeroIDModal] = useState(false)
 const [showNewDeroIDModal,setShowNewDeroIDModal] = useState(false)
 const [showEnterPassModal,setShowEnterPassModal] = useState(false)
@@ -64,7 +65,7 @@ const toasterRef = useRef<ToasterRef | null>(null)
     {/* <!-- left-col --> */}
     <LeftColumn>
       
-      <LeftContent
+      <LeftContent setShowSaveProfile={setShowSaveProfileDetailsModal}
       setShowRegisterDeroIDModal={setShowRegisterDeroIDModal} toasterRef={toasterRef} />
       
     </LeftColumn>
@@ -92,6 +93,7 @@ const toasterRef = useRef<ToasterRef | null>(null)
 }
 
 </div>
+{showSaveProfileDetailsModal && <SaveProfileDetailsModal setShow={setShowSaveProfileDetailsModal}/>}
 {showRegisterDeroIDModal&&<RegisterDeroIDModal setShow={setShowRegisterDeroIDModal} />}
 {showTransferModal&&<TransferModal setShow={setShowTransferModal}/>}
 
