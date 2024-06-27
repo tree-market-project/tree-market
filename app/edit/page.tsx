@@ -9,7 +9,7 @@ import {RightColumn} from "@/components/Common/RightColumn"
 import RightContent from "@/components/Wallet/RightContent"
 import RightContentVault from "@/components/Vault/RightContent"
 import FastRegModal from "@/components/Wallet/FastRegModal"
-import { useState,useRef } from "react"
+import { useState,useRef,Suspense } from "react"
 import { useWalletContext } from "@/contexts"
 import EnterPasswordModal from "@/components/Wallet/EnterPasswordModal"
 import RecoverFromHexModal from "@/components/Wallet/RecoverFromHexModal"
@@ -64,9 +64,11 @@ const toasterRef = useRef<ToasterRef | null>(null)
   <div className="relative lg:grid lg:grid-cols-5 xl:grid-cols-3 gap-4 mx-auto h-dvh w-full px-0 overflow-y-scroll lg:overflow-y-hidden scroller">
     {/* <!-- left-col --> */}
     <LeftColumn>
-      
-      <LeftContent setShowSaveProfile={setShowSaveProfileDetailsModal}
+      <Suspense fallback={<div>Loading...</div>}>
+        <LeftContent setShowSaveProfile={setShowSaveProfileDetailsModal}
       setShowRegisterDeroIDModal={setShowRegisterDeroIDModal} toasterRef={toasterRef} />
+      
+      </Suspense>
       
     </LeftColumn>
 

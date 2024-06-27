@@ -5,11 +5,17 @@ import { useWalletContext } from "@/contexts";
 export function useTransferWeb(){
   const {activeWallet,worker} = useWalletContext()
   const backupWorker = worker
+  let myWorker:Worker
 
   const transferWeb = async (worker:Worker|undefined|null,data:any):Promise<string> => {
     let txid=""
-    if(!worker){
-      worker = backupWorker
+    if(!worker && backupWorker){
+      myWorker = backupWorker
+    }else if(worker){
+      myWorker = worker
+    }
+    else{
+      return ""
     }
     if (!activeWallet?.open) return "";
     
@@ -28,11 +34,11 @@ export function useTransferWeb(){
 
       let asyncKey = 'tx';
       const tx :any= await new Promise((resolve) => {
-        worker.onmessage = (event) => {
+        myWorker.onmessage = (event) => {
           resolve(event.data);
         };
 
-        worker.postMessage({
+        myWorker.postMessage({
           functionName: 'WalletTransfer',
           args: [
             'key',
@@ -55,11 +61,11 @@ export function useTransferWeb(){
           let asyncKey2 = 'sent';
           // const send = window.WalletSendTransaction("sent", state.walletList[0].hexSeed, window[asyncKey].txHex)
           const send = await new Promise((resolve) => {
-            worker.onmessage = (event) => {
+            myWorker.onmessage = (event) => {
               resolve(event.data);
             };
 
-            worker.postMessage({
+            myWorker.postMessage({
               functionName: 'WalletSendTransaction',
               args: [
                 'key',
