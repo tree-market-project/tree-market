@@ -41,6 +41,23 @@ async function getDeroID(scid:string){
      console.log("response",response)
       const data = await response.json();
       console.log("response json",data)
+
+      let metadataString = '';
+    let i = 0;
+    while (data.result.stringkeys[`metadata-${i}`]) {
+      metadataString += hex2a(data.result.stringkeys[`metadata-${i}`]);
+      i++;
+    }
+
+    // If concatenated metadata string is not empty, parse it as JSON
+    if (metadataString) {
+      try {
+        const parsedMetadata = JSON.parse(metadataString);
+        id = { ...id, ...parsedMetadata };
+      } catch (jsonError) {
+        console.error('Error parsing concatenated metadata:', jsonError);
+      }
+    }
      
       if(data.result.stringkeys.description){
         id.description = hex2a(data.result.stringkeys.decimals)

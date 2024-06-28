@@ -12,14 +12,19 @@ const LeftContent:React.FC<{setShowSaveProfile:any,setShowRegisterDeroIDModal:an
   const scidParam = searchParams.get("scid")
   const scid = Array.isArray(scidParam)?scidParam[0]:scidParam||''
   const [image,setImage] = useState("")
+  const [description,setDescription] = useState("")
   const {setNewDetails} = useProfileContext()
 
   const handleChangeImage = (e:any)=>{
     setImage(e.target.value)
   }
 
+  const handleChangeDescription = (e:any)=>{
+    setDescription(e.target.value)
+  }
+
   const handleSave = async ()=>{
-    let newProfile:DeroID = {image:image,scid:scid}
+    let newProfile:DeroID = {image:image,scid:scid,description:description}
     setNewDetails(newProfile)
     setShowSaveProfile(true)
     //const txid = await editDeroID("image_url",image,"S",scid)
@@ -85,7 +90,7 @@ const LeftContent:React.FC<{setShowSaveProfile:any,setShowRegisterDeroIDModal:an
                         <div className="unselected bg-gray-200 hover:shadow-inner hover:shadow-gray-400 px-3 py-1 rounded-r-full cursor-pointer">Visual</div>
                       </div>
                     </div>
-                    <textarea name="didbio" id="didbio" placeholder="Add a description about this DeroID." className="py-1 text-sm sm:text-base bg-transparent focus:border-none focus:ring-0 focus:ring-inset px-2 h-28"></textarea>
+                    <textarea value={description} onChange={handleChangeDescription} name="didbio" id="didbio" placeholder="Add a description for this DeroID." className="py-1 text-sm sm:text-base bg-transparent focus:border-none focus:ring-0 focus:ring-inset px-2 h-28"></textarea>
                   </div>{/* <!-- input-deroid-bio --> */}
 
                   {false&&<>

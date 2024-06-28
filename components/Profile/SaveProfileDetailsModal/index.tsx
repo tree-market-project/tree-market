@@ -27,8 +27,10 @@ const SaveProfileDetailsModal:React.FC<{setShow:any}> = ({setShow}) =>{
       return
     }
     setStep(1)
-    if(newDetails?.image&&newDetails?.image!=activeProfile?.image)
-    {const txid = await editDeroID("image_url",newDetails?.image,"S",scid)
+    if(newDetails&&JSON.stringify(newDetails)!=JSON.stringify(activeProfile))
+    {
+      delete (newDetails as any).scid
+      const txid = await editDeroID("metadata-0",JSON.stringify(newDetails),"S",scid)
     setTXID(txid)}
   }
     return(
@@ -57,7 +59,7 @@ const SaveProfileDetailsModal:React.FC<{setShow:any}> = ({setShow}) =>{
     <div className="grid grid-cols-3 gap-2 pt-2">
       <div className="title px-4 font-medium">SCID</div>
       <div className="data col-span-2 px-4 break-all">
-        {newDetails?.scid}
+        {scid}
       </div>
     </div>
     <div className="grid grid-cols-3 gap-2 pt-2">
@@ -69,7 +71,7 @@ const SaveProfileDetailsModal:React.FC<{setShow:any}> = ({setShow}) =>{
     <div className="grid grid-cols-3 gap-2 pt-2">
       <div className="title px-4 font-medium">Bio</div>
       <div className="data col-span-2 px-4">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        {newDetails?.description}
       </div>
     </div>
     {/* <div className="grid grid-cols-3 gap-2 pt-2">
