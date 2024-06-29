@@ -2,15 +2,30 @@
 import ActiveWalletBox from "@/components/Wallet/ActiveWalletBox"
 import { useEditDeroID } from "@/hooks/useEditDeroID"
 import { useSearchParams } from "next/navigation"
-import { useState } from "react"
+import { useState,useEffect } from "react"
 import { useProfileContext } from "@/contexts"
 import { DeroID } from "@/types"
+import getDeroID from "@/API/getDeroID"
 
 const LeftContent:React.FC<{setShowSaveProfile:any,setShowRegisterDeroIDModal:any,toasterRef:any}> = ({setShowSaveProfile,setShowRegisterDeroIDModal,toasterRef})=>{
+  
+  const getID = async()=>{
+    let newID = await getDeroID(scid)
+    if(typeof newID == "string"){
+      return
+    }
+    setID(newID)
+  }
+
+  useEffect(()=>{
+    getID()
+  },[])
   const editDeroID = useEditDeroID()
   const searchParams = useSearchParams()
   const scidParam = searchParams.get("scid")
   const scid = Array.isArray(scidParam)?scidParam[0]:scidParam||''
+  const [id,setID] = useState<DeroID>({scid:scid})
+
   const [image,setImage] = useState("")
   const [description,setDescription] = useState("")
   const {setNewDetails} = useProfileContext()
@@ -79,7 +94,7 @@ const LeftContent:React.FC<{setShowSaveProfile:any,setShowRegisterDeroIDModal:an
                                         
                   <div className="input-deroid-img relative grid items-center px-2 py-2 bg-gray-50 shadow-inner shadow-gray-400 ring-1 ring-gray-900/5 mx-auto w-full rounded-lg">
                     <label htmlFor="didimg" className="text-sm font-semibold px-2">Image</label>
-                    <input value={image} onChange={handleChangeImage} type="text" name="didimg" id="didimg" placeholder="https://imageurl.website" className="py-1 text-sm sm:text-base bg-transparent focus:border-none focus:ring-0 focus:ring-inset px-2"/>
+                    <input value={image} onChange={handleChangeImage} type="text" name="didimg" id="didimg" placeholder={id.image||"https://imageurl.website" }className="py-1 text-sm sm:text-base bg-transparent focus:border-none focus:ring-0 focus:ring-inset px-2"/>
                   </div>{/* <!-- input-deroid-img --> */}
 
                   <div className="input-deroid-bio relative grid items-center px-2 py-2 bg-gray-50 shadow-inner shadow-gray-400 ring-1 ring-gray-900/5 mx-auto w-full rounded-lg">
@@ -90,7 +105,7 @@ const LeftContent:React.FC<{setShowSaveProfile:any,setShowRegisterDeroIDModal:an
                         <div className="unselected bg-gray-200 hover:shadow-inner hover:shadow-gray-400 px-3 py-1 rounded-r-full cursor-pointer">Visual</div>
                       </div>
                     </div>
-                    <textarea value={description} onChange={handleChangeDescription} name="didbio" id="didbio" placeholder="Add a description for this DeroID." className="py-1 text-sm sm:text-base bg-transparent focus:border-none focus:ring-0 focus:ring-inset px-2 h-28"></textarea>
+                    <textarea value={description} onChange={handleChangeDescription} name="didbio" id="didbio" placeholder={id.description||"Add a description for this DeroID."} className="py-1 text-sm sm:text-base bg-transparent focus:border-none focus:ring-0 focus:ring-inset px-2 h-28"></textarea>
                   </div>{/* <!-- input-deroid-bio --> */}
 
                   {false&&<>
