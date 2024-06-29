@@ -8,6 +8,7 @@ export function useRegisterWalletName(){
     const registerWalletName = async (name:string) =>{
         const data:any = {
             scid:registry,
+            ringsize:2,
             sc_rpc:[{name:"entrypoint",datatype:"S",value:"Register"},{name:"name",datatype:"S",value:name}]
         }
         const txid = await transfer(data)
