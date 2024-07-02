@@ -9,6 +9,7 @@ export function useRegisterDeroID(){
     const registerDeroID = async (name:string, scid:string) =>{
         const data:any = {
             scid:registry,
+            ringsize:2,
             sc_rpc:[{name:"entrypoint",datatype:"S",value:"Register"},{name:"name",datatype:"S",value:name},{name:"key",datatype:"S",value:scid},{name:"owner",datatype:"S",value:""},{name:"transferCost",datatype:"U",value:1},{name:"data",datatype:"S",value:scid},{name:"datatype",datatype:"S",value:"DeroID"}],
             transfers:[{scid:dns,burn:1000}]
         }
