@@ -54,8 +54,8 @@ const CreateCart:React.FC<{column:string,handleShowCalculator:any}> = ({column,h
 
   const updateProgress = async()=>{
     const atomicUSDRaised = await getProgress()
-    const usdRaised = atomicUSDRaised/10000000
-    const usdGoal = 2000000
+    const usdRaised = atomicUSDRaised/10000000 -36275.53
+    const usdGoal = 8000
     const newPercent = Math.floor(usdRaised*100/usdGoal)
     const newPercentString = newPercent.toString()
     setPercentRaised(newPercentString)
@@ -88,7 +88,7 @@ const CreateCart:React.FC<{column:string,handleShowCalculator:any}> = ({column,h
     maximumFractionDigits: 2
   })}</h3>
     </div>
-    <p className="text-gray-500 text-lg font-semibold">Raised out of USDT 2,000,000 Goal</p>
+    <p className="text-gray-500 text-lg font-semibold">Raised out of USDT 8,000 Goal</p>
   </div>  
 
   <div className="progress_bar relative flex items-center w-full px-2 pb-4">
