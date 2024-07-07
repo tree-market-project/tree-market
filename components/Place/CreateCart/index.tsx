@@ -95,14 +95,11 @@ const CreateCart:React.FC<{column:string,handleShowCalculator:any}> = ({column,h
     <div className="relative w-full rounded-xl bg-gradient-to-l from-gray-300 to-gray-100 h-[20px]">
       <div style={{width:`${percentRaised}%`}} className={`progress flex flex-col justify-center items-center content-start p-2 bg-lime-600 rounded-xl h-[20px]`}>
       </div>
-      <div className="break-even absolute flex flex-col top-0 left-[3%]">
-        <div className="w-[10px] h-[20px] bg-red-600 ml-12"></div>
-        <div className="text-xs mt-2">Founders Break Even</div>
-      </div>
+      
     </div>
   </div>{/* <!-- progress_bar --> */}
 
-  <div className="flex flex-col gap-4 px-2">
+  <div className="hidden flex flex-col gap-4 px-2">
     <p className="text-sm leading-5">This project will be fully funded if it reaches its goal by Saturday June 15, 2024 @ 3:00 PM EST.</p>
   </div>
 
