@@ -21,7 +21,7 @@ export function useTransferWeb(){
     
       const wasmData = {
         Transfers: data.transfers||[{destination:"dero1qyy5mspp05h430wzs60jg2chlj9mec8uxznyrwk7xztadlku0ccggqq6lct08",amount:0}],
-        SC_Code: data.sc,
+        SC_Code: data.sc||"",
         SC_ID: data.scid||"",
         SC_RPC: data.sc_rpc,
         Ringsize: data.ringsize,
@@ -30,7 +30,8 @@ export function useTransferWeb(){
 
       let fileData = JSON.parse(activeWallet.fileData);
      
-    
+    console.log("worker: ",myWorker)
+    console.log("wasmData",wasmData)
 
       let asyncKey = 'tx';
       const tx :any= await new Promise((resolve) => {
@@ -43,7 +44,7 @@ export function useTransferWeb(){
           args: [
             'key',
             activeWallet.name,
-            JSON.stringify(data),
+            JSON.stringify(wasmData),
           ],
         });
       });

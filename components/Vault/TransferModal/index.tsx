@@ -265,7 +265,7 @@ if (selectedToken?.decimals && data.transfers.length > 0) {
           <div>
             <div className="font-medium">You will send</div>
             <div className="text-cyan-800 font-bold">
-              { total} DERO
+              { total} {selectedToken?.symbol}
             </div>
           </div>
          { activeWallet?.app!="g45w"&&<div className="border border-gray-400 bg-gray-50 px-3 py-2 rounded-md">
@@ -299,7 +299,7 @@ if (selectedToken?.decimals && data.transfers.length > 0) {
           <div>
             <div className="font-medium">You sent</div>
             <div className="text-cyan-800 font-bold">
-              {formData.transfers[0].amount} DERO
+              {formData.transfers[0].amount} {selectedToken?.symbol}
             </div>
           </div>
           {activeWallet?.app!="g45w"&&<div className="border border-gray-400 bg-gray-50 px-3 py-2 rounded-md">

@@ -42,11 +42,12 @@ self.onmessage = async (event) => {
     const { functionName, args } = event.data;
     const result = await self[functionName].apply(null, args);
     let key = args[0];
-    console.log("worker received this msg", functionName, args);
+    console.log("Worker received this msg", functionName, args);
 
     if (key == "key") {
       const intervalId = setInterval(() => {
         console.log("waiting for key", key);
+        console.log("self",self)
         if (self[key]) {
           clearInterval(intervalId);
           self.postMessage({ result, key: self[key] });

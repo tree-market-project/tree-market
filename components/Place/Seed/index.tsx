@@ -99,7 +99,7 @@ const Seed: React.FC<{handleShowCalculator:any}> = ({handleShowCalculator})=>{
                   <p>That is, indeed, what you are looking at here! Tree.Market is the first crowdfunding project to ever be released on Tree.Market.</p>
                 </div>{/* <!-- content-section2 --> */}
 
-                <StayInformed/>
+                
 
                 <div className="heading text-center text-2xl font-bold px-2 py-2">
                   <h2>Project Funding & Roadmap</h2>

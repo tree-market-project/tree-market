@@ -77,7 +77,7 @@ return(
                     </div>
                     <div className="relative flex flex-col gap-4">
                       <div className="deroid-name text-lg font-semibold">
-                        {id.names? id.names[0]:"unnamed"}
+                        {id.registeredNames? id.registeredNames[0]:"unnamed"}
                       </div>
 
                       <div className="flex flex-col sm:flex-row items-start justify-between gap-4 sm:gap-8">

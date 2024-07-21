@@ -10,11 +10,14 @@ export function useRegisterDeroID(){
         const data:any = {
             scid:registry,
             ringsize:2,
-            sc_rpc:[{name:"entrypoint",datatype:"S",value:"Register"},{name:"name",datatype:"S",value:name},{name:"key",datatype:"S",value:scid},{name:"owner",datatype:"S",value:""},{name:"transferCost",datatype:"U",value:1},{name:"data",datatype:"S",value:scid},{name:"datatype",datatype:"S",value:"DeroID"}],
+            sc_rpc:[{name:"SC_ACTION",datatype:"U",value:0},{name:"SC_ID",datatype:"H",value:"ead31b12a6e5565cf24247ce8414e9e476c56d3b45358a5e4b7345053923c6da"},{name:"entrypoint",datatype:"S",value:"Register"},{name:"name",datatype:"S",value:name},{name:"key",datatype:"S",value:scid},{name:"owner",datatype:"S",value:""},{name:"transferCost",datatype:"U",value:1},{name:"data",datatype:"S",value:scid},{name:"datatype",datatype:"S",value:"DeroID"}],
             transfers:[{scid:dns,burn:1000}]
         }
         const txid = await transfer(data)
         return txid
+
+        
+    
 
     }
     return registerDeroID
