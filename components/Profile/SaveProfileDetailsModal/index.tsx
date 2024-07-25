@@ -74,36 +74,36 @@ const SaveProfileDetailsModal:React.FC<{setShow:any}> = ({setShow}) =>{
         {newDetails?.description}
       </div>
     </div>
-    {/* <div className="grid grid-cols-3 gap-2 pt-2">
+     <div className="grid grid-cols-3 gap-2 pt-2">
       <div className="title px-4 font-medium">First Name</div>
       <div className="data col-span-2 px-4">
-        John
+        {newDetails?.fname}
       </div>
     </div>
     <div className="grid grid-cols-3 gap-2 pt-2">
       <div className="title px-4 font-medium">Last Name</div>
       <div className="data col-span-2 px-4">
-        Doe
+        {newDetails?.lname}
       </div>
     </div>
     <div className="grid grid-cols-3 gap-2 pt-2">
-      <div className="title px-4 font-medium">Field Title</div>
+      <div className="title px-4 font-medium">Website</div>
       <div className="data col-span-2 px-4">
-        Field Data
+        {newDetails?.website}
       </div>
     </div>
     <div className="grid grid-cols-3 gap-2 pt-2">
-      <div className="title px-4 font-medium">Field Title</div>
+      <div className="title px-4 font-medium">Email</div>
       <div className="data col-span-2 px-4">
-        Field Data
+        {newDetails?.email}
       </div>
     </div>
     <div className="grid grid-cols-3 gap-2 pt-2">
-      <div className="title px-4 font-medium">Field Title</div>
+      <div className="title px-4 font-medium">Phone</div>
       <div className="data col-span-2 px-4">
-        Field Data
+        {newDetails?.phone}
       </div>
-    </div> */}
+    </div> 
 </div>{/* <!-- deroid-info --> */}
 
 <div className="txfee grid gap-3 px-2 py-1 border-l-4 border-cyan-800">

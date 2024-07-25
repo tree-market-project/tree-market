@@ -10,7 +10,7 @@ export function useEditDeroID(){
         const data:any = {
             scid:scid,
             ringsize:2,
-            sc_rpc:[{name:"entrypoint",datatype:"S",value:"UpdateVar"},{name:"key",datatype:"S",value:key},{name:"value",datatype:"S",value:value},{name:"t",datatype:"S",value:t}]
+            sc_rpc:[{name:"SC_ACTION",datatype:"U",value:0},{name:"SC_ID",datatype:"H",value:scid},{name:"entrypoint",datatype:"S",value:"UpdateVar"},{name:"key",datatype:"S",value:key},{name:"value",datatype:"S",value:value},{name:"t",datatype:"S",value:t}]
         }
         const txid = await transfer(data)
         return txid

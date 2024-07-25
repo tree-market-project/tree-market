@@ -171,6 +171,10 @@ export type DeroID = {
   registeredNames?: string[];
   scid:string;
   website?:string;
+  email?:string;
+  fname?:string;
+  lname?:string;
+  phone?:string;
   address?:string;
   reputation?:number;
   registered?:boolean;

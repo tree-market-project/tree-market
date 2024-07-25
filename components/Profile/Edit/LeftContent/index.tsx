@@ -7,6 +7,22 @@ import { useProfileContext } from "@/contexts"
 import { DeroID } from "@/types"
 import getDeroID from "@/API/getDeroID"
 
+interface FormState {
+  fname: string;
+  lname: string;
+  email: string;
+  phone: string;
+  website: string;
+}
+
+const initialState: FormState = {
+  fname: '',
+  lname: '',
+  email: '',
+  phone: '',
+  website: '',
+};
+
 const LeftContent:React.FC<{setShowSaveProfile:any,setShowRegisterDeroIDModal:any,toasterRef:any}> = ({setShowSaveProfile,setShowRegisterDeroIDModal,toasterRef})=>{
   
   const getID = async()=>{
@@ -29,6 +45,15 @@ const LeftContent:React.FC<{setShowSaveProfile:any,setShowRegisterDeroIDModal:an
   const [image,setImage] = useState("")
   const [description,setDescription] = useState("")
   const {setNewDetails} = useProfileContext()
+  const [formState, setFormState] = useState<FormState>(initialState);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormState(prevState => ({
+      ...prevState,
+      [name]: value
+    }));
+  };
 
   const handleChangeImage = (e:any)=>{
     setImage(e.target.value)
@@ -39,7 +64,7 @@ const LeftContent:React.FC<{setShowSaveProfile:any,setShowRegisterDeroIDModal:an
   }
 
   const handleSave = async ()=>{
-    let newProfile:DeroID = {image:image,scid:scid,description:description}
+    let newProfile:DeroID = {image:image||id.image,scid:scid,description:description||id.description,fname:formState.fname||id.fname,lname:formState.lname||id.lname,email:formState.email||id.email,website:formState.website||id.website,phone:formState.phone||id.phone}
     setNewDetails(newProfile)
     setShowSaveProfile(true)
     //const txid = await editDeroID("image_url",image,"S",scid)
@@ -110,39 +135,80 @@ const LeftContent:React.FC<{setShowSaveProfile:any,setShowRegisterDeroIDModal:an
                     <textarea value={description} onChange={handleChangeDescription} name="didbio" id="didbio" placeholder={id.description||"Add a description for this DeroID."} className="py-1 text-sm sm:text-base bg-transparent focus:border-none focus:ring-0 focus:ring-inset px-2 h-28"></textarea>
                   </div>{/* <!-- input-deroid-bio --> */}
 
-                  {false&&<>
-                    <div className="separator flex items-center justify-between gap-4 my-2">
-                    <div className="text-gray-700 font-medium shrink-0">Contact Information</div>
-                    <div className="h-2 border-b border-gray-200 w-full"></div>
-                  </div>
+                  <div>
+      <div className="separator flex items-center justify-between gap-4 my-2">
+        <div className="text-gray-700 font-medium shrink-0">Contact Information</div>
+        <div className="h-2 border-b border-gray-200 w-full"></div>
+      </div>
 
-                  <div className="grid sm:grid-cols-2 gap-4">
-                    <div className="input-firstname relative grid items-center px-2 py-2 bg-gray-50 shadow-inner shadow-gray-400 ring-1 ring-gray-900/5 mx-auto w-full rounded-lg">
-                      <label htmlFor="fname" className="text-sm font-semibold px-2">First Name</label>
-                      <input type="text" name="fname" id="fname" placeholder="" className="py-1 text-sm sm:text-base bg-transparent focus:border-none focus:ring-0 focus:ring-inset px-2"/>
-                    </div>{/* <!-- input-firstname --> */}
+      <div className="grid sm:grid-cols-2 gap-4">
+        <div className="input-firstname relative grid items-center px-2 py-2 bg-gray-50 shadow-inner shadow-gray-400 ring-1 ring-gray-900/5 mx-auto w-full rounded-lg">
+          <label htmlFor="fname" className="text-sm font-semibold px-2">First Name</label>
+          <input
+            type="text"
+            name="fname"
+            id="fname"
+            value={formState.fname}
+            onChange={handleChange}
+            placeholder={id.fname||"John"}
+            className="py-1 text-sm sm:text-base bg-transparent focus:border-none focus:ring-0 focus:ring-inset px-2"
+          />
+        </div>
 
-                    <div className="input-lastname relative grid items-center px-2 py-2 bg-gray-50 shadow-inner shadow-gray-400 ring-1 ring-gray-900/5 mx-auto w-full rounded-lg">
-                      <label htmlFor="lname" className="text-sm font-semibold px-2">Last Name</label>
-                      <input type="text" name="lname" id="lname" placeholder="" className="py-1 text-sm sm:text-base bg-transparent focus:border-none focus:ring-0 focus:ring-inset px-2"/>
-                    </div>{/* <!-- input-lastname --> */}
-                  </div>
+        <div className="input-lastname relative grid items-center px-2 py-2 bg-gray-50 shadow-inner shadow-gray-400 ring-1 ring-gray-900/5 mx-auto w-full rounded-lg">
+          <label htmlFor="lname" className="text-sm font-semibold px-2">Last Name</label>
+          <input
+            type="text"
+            name="lname"
+            id="lname"
+            value={formState.lname}
+            onChange={handleChange}
+            placeholder={id.lname||"Smith"}
+            className="py-1 text-sm sm:text-base bg-transparent focus:border-none focus:ring-0 focus:ring-inset px-2"
+          />
+        </div>
+      </div>
 
-                  <div className="input-email relative grid items-center px-2 py-2 bg-gray-50 shadow-inner shadow-gray-400 ring-1 ring-gray-900/5 mx-auto w-full rounded-lg">
-                    <label htmlFor="email" className="text-sm font-semibold px-2">Email</label>
-                    <input type="email" name="email" id="email" placeholder="" className="py-1 text-sm sm:text-base bg-transparent focus:border-none focus:ring-0 focus:ring-inset px-2"/>
-                  </div>{/* <!-- input-email --> */}
+      <div className="input-email relative grid items-center px-2 py-2 bg-gray-50 shadow-inner shadow-gray-400 ring-1 ring-gray-900/5 mx-auto w-full rounded-lg">
+        <label htmlFor="email" className="text-sm font-semibold px-2">Email</label>
+        <input
+          type="email"
+          name="email"
+          id="email"
+          value={formState.email}
+          onChange={handleChange}
+          placeholder={id.email||"example@email.com"}
+          className="py-1 text-sm sm:text-base bg-transparent focus:border-none focus:ring-0 focus:ring-inset px-2"
+        />
+      </div>
 
-                  <div className="input-phone relative grid items-center px-2 py-2 bg-gray-50 shadow-inner shadow-gray-400 ring-1 ring-gray-900/5 mx-auto w-full rounded-lg">
-                    <label htmlFor="phone" className="text-sm font-semibold px-2">Phone Number</label>
-                    <input type="tel" name="phone" id="phone" placeholder="" className="py-1 text-sm sm:text-base bg-transparent focus:border-none focus:ring-0 focus:ring-inset px-2" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"/>
-                  </div>{/* <!-- input-email --> */}
+      <div className="input-phone relative grid items-center px-2 py-2 bg-gray-50 shadow-inner shadow-gray-400 ring-1 ring-gray-900/5 mx-auto w-full rounded-lg">
+        <label htmlFor="phone" className="text-sm font-semibold px-2">Phone Number</label>
+        <input
+          type="tel"
+          name="phone"
+          id="phone"
+          value={formState.phone}
+          onChange={handleChange}
+          placeholder={id.phone||"(123)-456-7890"}
+          pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+          className="py-1 text-sm sm:text-base bg-transparent focus:border-none focus:ring-0 focus:ring-inset px-2"
+        />
+      </div>
 
-                  <div className="input-website relative grid items-center px-2 py-2 bg-gray-50 shadow-inner shadow-gray-400 ring-1 ring-gray-900/5 mx-auto w-full rounded-lg">
-                    <label htmlFor="website" className="text-sm font-semibold px-2">Website</label>
-                    <input type="text" name="website" id="website" placeholder="https://yourwebsite.com" className="py-1 text-sm sm:text-base bg-transparent focus:border-none focus:ring-0 focus:ring-inset px-2"/>
-                  </div>
-                  </>}{/* <!-- input-website --> */}
+      <div className="input-website relative grid items-center px-2 py-2 bg-gray-50 shadow-inner shadow-gray-400 ring-1 ring-gray-900/5 mx-auto w-full rounded-lg">
+        <label htmlFor="website" className="text-sm font-semibold px-2">Website</label>
+        <input
+          type="text"
+          name="website"
+          id="website"
+          value={formState.website}
+          onChange={handleChange}
+          placeholder={id.website||"https://yourwebsite.com"}
+          className="py-1 text-sm sm:text-base bg-transparent focus:border-none focus:ring-0 focus:ring-inset px-2"
+        />
+      </div>
+    </div>{/* <!-- input-website --> */}
 
                 {false&&<>  
                 <div className="separator flex items-center justify-between gap-4 my-2">
