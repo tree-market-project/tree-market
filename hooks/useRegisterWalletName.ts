@@ -9,7 +9,7 @@ export function useRegisterWalletName(){
         const data:any = {
             scid:registry,
             ringsize:2,
-            sc_rpc:[{name:"entrypoint",datatype:"S",value:"Register"},{name:"name",datatype:"S",value:name}]
+            sc_rpc:[{name:"SC_ACTION",datatype:"U",value:0},{name:"SC_ID",datatype:"H",value:registry},{name:"entrypoint",datatype:"S",value:"Register"},{name:"name",datatype:"S",value:name}]
         }
         const txid = await transfer(data)
         return txid
