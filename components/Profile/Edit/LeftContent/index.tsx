@@ -78,7 +78,7 @@ const LeftContent:React.FC<{setShowSaveProfile:any,setShowRegisterDeroIDModal:an
                 <div className="flex flex-col gap-2">
                   
                     {id.registeredNames?
-                    id.registeredNames?.map(name=><div className="deroid-name bg-gray-100 px-2 rounded-sm">{name}</div>)
+                    id.registeredNames?.map((name,i)=><div key={i} className="deroid-name bg-gray-100 px-2 rounded-sm">{name}</div>)
                   :"Unnamed"}
                   
                   <p className="text-sm px-2">This is a unique name for your DeroID. This name is case insensitive. Once it is registered it cannot be used by anyone else.</p>
