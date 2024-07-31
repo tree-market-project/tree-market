@@ -25,6 +25,8 @@ const initialState: FormState = {
 
 const LeftContent:React.FC<{setShowSaveProfile:any,setShowRegisterDeroIDModal:any,toasterRef:any}> = ({setShowSaveProfile,setShowRegisterDeroIDModal,toasterRef})=>{
   
+  const [otherSocials,setOtherSocials] = useState([0])
+
   const getID = async()=>{
     let newID = await getDeroID(scid)
     if(typeof newID == "string"){
@@ -46,6 +48,10 @@ const LeftContent:React.FC<{setShowSaveProfile:any,setShowRegisterDeroIDModal:an
   const [description,setDescription] = useState("")
   const {setNewDetails} = useProfileContext()
   const [formState, setFormState] = useState<FormState>(initialState);
+
+  const handleAddOtherSocial = () =>{
+    setOtherSocials([...otherSocials,otherSocials.length])
+  }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -210,7 +216,7 @@ const LeftContent:React.FC<{setShowSaveProfile:any,setShowRegisterDeroIDModal:an
       </div>
     </div>{/* <!-- input-website --> */}
 
-                {false&&<>  
+                <>  
                 <div className="separator flex items-center justify-between gap-4 my-2">
                     <div className="text-gray-700 font-medium shrink-0">Social Links</div>
                     <div className="h-2 border-b border-gray-200 w-full"></div>
@@ -236,24 +242,24 @@ const LeftContent:React.FC<{setShowSaveProfile:any,setShowRegisterDeroIDModal:an
                     <input type="text" name="linkedin" id="linkedin" placeholder="https://linkedin.com/your_page_name" className="py-1 text-sm sm:text-base bg-transparent focus:border-none focus:ring-0 focus:ring-inset px-2"/>
                   </div>{/* <!-- input-linkedin --> */}
 
-                  <div className="grid sm:grid-cols-3 gap-4 p-2 bg-gray-100 rounded-lg">
+                  {otherSocials.map((x,i)=><div key={i} className="grid sm:grid-cols-3 gap-4 p-2 bg-gray-100 rounded-lg">
                     <div className="input-sociallabel relative grid items-center px-2 py-2 bg-gray-50 shadow-inner shadow-gray-400 ring-1 ring-gray-900/5 mx-auto w-full rounded-lg">
                       <label htmlFor="sociallabel" className="text-sm font-semibold px-2">Label</label>
-                      <input type="text" name="sociallabel" id="sociallabel" placeholder="" className="w-full py-1 text-sm sm:text-base bg-transparent focus:border-none focus:ring-0 focus:ring-inset px-2"/>
+                      <input type="text" name="sociallabel" id={`other-label${i}`} placeholder="" className="w-full py-1 text-sm sm:text-base bg-transparent focus:border-none focus:ring-0 focus:ring-inset px-2"/>
                     </div>{/* <!-- input-sociallabel --> */}
 
                     <div className="input-socialurl sm:last:col-span-2 relative grid items-center px-2 py-2 bg-gray-50 shadow-inner shadow-gray-400 ring-1 ring-gray-900/5 mx-auto w-full rounded-lg">
                       <label htmlFor="socialurl" className="text-sm font-semibold px-2">URL</label>
-                      <input type="text" name="socialurl" id="socialurl" placeholder="https://website.com/your_page_name" className="w-full py-1 text-sm sm:text-base bg-transparent focus:border-none focus:ring-0 focus:ring-inset px-2"/>
+                      <input type="text" name="socialurl" id={`other-url${i}`} placeholder="https://website.com/your_page_name" className="w-full py-1 text-sm sm:text-base bg-transparent focus:border-none focus:ring-0 focus:ring-inset px-2"/>
                     </div>{/* <!-- input-lastname --> */}
-                  </div>
+                  </div>)}
 
                   <div className="flex">
-                    <div className="text-sm bg-gray-200 px-4 py-2 rounded-md shadow-sm shadow-gray-400 cursor-pointer">Add Another</div>
+                    <div onClick={handleAddOtherSocial} className="text-sm bg-gray-200 px-4 py-2 rounded-md shadow-sm shadow-gray-400 cursor-pointer">Add Another</div>
                   </div>
-                  </>}
+                  </>
 
-                  {false && <>
+                   <>
                   <div className="separator flex items-center justify-between gap-4 my-2">
                     <div className="text-gray-700 font-medium shrink-0">Addresses</div>
                     <div className="h-2 border-b border-gray-200 w-full"></div>
@@ -348,7 +354,7 @@ const LeftContent:React.FC<{setShowSaveProfile:any,setShowRegisterDeroIDModal:an
                     </div>{/* <!-- input-shipcountry --> */}
 
                   </div>
-                  </>}{/* <!-- shipping-address-fields --> */}
+                  </>{/* <!-- shipping-address-fields --> */}
 
                 </div>{/* <!-- input-fields --> */}
 
