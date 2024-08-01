@@ -13,6 +13,13 @@ interface FormState {
   email: string;
   phone: string;
   website: string;
+  fb: string;
+  insta: string;
+  twitter: string;
+  linkedin: string;
+  otherSocials: { label: string; url: string }[];
+  billingAddress:{line1:string; line2: string; city:string;state:string; zip: string; country: string};
+  shippingAddress:{line1:string; line2: string; city:string;state:string; zip: string; country: string};
 }
 
 const initialState: FormState = {
@@ -21,11 +28,18 @@ const initialState: FormState = {
   email: '',
   phone: '',
   website: '',
+  fb: '',
+  insta: '',
+  twitter: '',
+  linkedin: '',
+  otherSocials: [{ label: '', url: '' }],
+  billingAddress:{line1:'',line2:'',city:'',state:'',zip:'',country:''},
+  shippingAddress:{line1:'',line2:'',city:'',state:'',zip:'',country:''}
 };
 
 const LeftContent:React.FC<{setShowSaveProfile:any,setShowRegisterDeroIDModal:any,toasterRef:any}> = ({setShowSaveProfile,setShowRegisterDeroIDModal,toasterRef})=>{
   
-  const [otherSocials,setOtherSocials] = useState([0])
+ 
 
   const getID = async()=>{
     let newID = await getDeroID(scid)
@@ -43,22 +57,44 @@ const LeftContent:React.FC<{setShowSaveProfile:any,setShowRegisterDeroIDModal:an
   const scidParam = searchParams.get("scid")
   const scid = Array.isArray(scidParam)?scidParam[0]:scidParam||''
   const [id,setID] = useState<DeroID>({scid:scid})
+  const [addressForm,setAddressForm] = useState("billing")
 
   const [image,setImage] = useState("")
   const [description,setDescription] = useState("")
   const {setNewDetails} = useProfileContext()
   const [formState, setFormState] = useState<FormState>(initialState);
 
-  const handleAddOtherSocial = () =>{
-    setOtherSocials([...otherSocials,otherSocials.length])
-  }
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
+  const handleAddOtherSocial = () => {
     setFormState(prevState => ({
       ...prevState,
-      [name]: value
+      otherSocials: [...prevState.otherSocials, { label: '', url: '' }]
     }));
+  }
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>, index?: number, field?: 'label' | 'url') => {
+    const { name, value } = e.target;
+    if (index !== undefined && field) {
+      setFormState(prevState => {
+        const otherSocials = [...prevState.otherSocials];
+        otherSocials[index][field] = value;
+        return { ...prevState, otherSocials };
+      });
+    }else if (name.startsWith("billingAddress") || name.startsWith("shippingAddress")) {
+      const [addressType, addressField] = name.split(".");
+      setFormState((prevState) => ({
+        ...prevState,
+        [addressType]: {
+          ...prevState[addressType as 'billingAddress' | 'shippingAddress'],
+          [addressField]: value,
+        },
+      }));
+    } 
+    else {
+      setFormState(prevState => ({
+        ...prevState,
+        [name]: value
+      }));
+    }
   };
 
   const handleChangeImage = (e:any)=>{
@@ -70,7 +106,21 @@ const LeftContent:React.FC<{setShowSaveProfile:any,setShowRegisterDeroIDModal:an
   }
 
   const handleSave = async ()=>{
-    let newProfile:DeroID = {image:image||id.image,scid:scid,description:description||id.description,fname:formState.fname||id.fname,lname:formState.lname||id.lname,email:formState.email||id.email,website:formState.website||id.website,phone:formState.phone||id.phone}
+    let newProfile:DeroID = {image:image||id.image,
+      scid:scid,
+      description:description||id.description,
+      fname:formState.fname||id.fname,
+      lname:formState.lname||id.lname,
+      email:formState.email||id.email,
+      website:formState.website||id.website,
+      phone:formState.phone||id.phone,
+      fb:formState.fb || id.fb,
+      insta:formState.insta || id.insta,
+      twitter:formState.twitter || id.twitter,
+      linkedin:formState.linkedin || id.linkedin,
+      otherSocials:formState.otherSocials || id.otherSocials,
+    billingAddress:formState.billingAddress || id.billingAddress,
+  shippingAddress:formState.shippingAddress || id.shippingAddress}
     setNewDetails(newProfile)
     setShowSaveProfile(true)
     //const txid = await editDeroID("image_url",image,"S",scid)
@@ -224,35 +274,53 @@ const LeftContent:React.FC<{setShowSaveProfile:any,setShowRegisterDeroIDModal:an
 
                   <div className="input-fb relative grid items-center px-2 py-2 bg-gray-50 shadow-inner shadow-gray-400 ring-1 ring-gray-900/5 mx-auto w-full rounded-lg">
                     <label htmlFor="fb" className="text-sm font-semibold px-2">Facebook</label>
-                    <input type="text" name="fb" id="fb" placeholder="https://facebook.com/your_page_name" className="py-1 text-sm sm:text-base bg-transparent focus:border-none focus:ring-0 focus:ring-inset px-2"/>
+                    <input value={formState.fb} onChange={handleChange} type="text" name="fb" id="fb" placeholder="https://facebook.com/your_page_name" className="py-1 text-sm sm:text-base bg-transparent focus:border-none focus:ring-0 focus:ring-inset px-2"/>
                   </div>{/* <!-- input-fb --> */}
 
                   <div className="input-insta relative grid items-center px-2 py-2 bg-gray-50 shadow-inner shadow-gray-400 ring-1 ring-gray-900/5 mx-auto w-full rounded-lg">
                     <label htmlFor="insta" className="text-sm font-semibold px-2">Instagram</label>
-                    <input type="text" name="insta" id="insta" placeholder="https://instagram.com/your_page_name" className="py-1 text-sm sm:text-base bg-transparent focus:border-none focus:ring-0 focus:ring-inset px-2"/>
+                    <input value={formState.insta} onChange={handleChange} type="text" name="insta" id="insta" placeholder="https://instagram.com/your_page_name" className="py-1 text-sm sm:text-base bg-transparent focus:border-none focus:ring-0 focus:ring-inset px-2"/>
                   </div>{/* <!-- input-insta --> */}
 
                   <div className="input-twitter relative grid items-center px-2 py-2 bg-gray-50 shadow-inner shadow-gray-400 ring-1 ring-gray-900/5 mx-auto w-full rounded-lg">
                     <label htmlFor="twitter" className="text-sm font-semibold px-2">X (twitter)</label>
-                    <input type="text" name="twitter" id="twitter" placeholder="https://twitter.com/your_page_name" className="py-1 text-sm sm:text-base bg-transparent focus:border-none focus:ring-0 focus:ring-inset px-2"/>
+                    <input value={formState.twitter} onChange={handleChange} type="text" name="twitter" id="twitter" placeholder="https://twitter.com/your_page_name" className="py-1 text-sm sm:text-base bg-transparent focus:border-none focus:ring-0 focus:ring-inset px-2"/>
                   </div>{/* <!-- input-twitter --> */}
 
                   <div className="input-linkedin relative grid items-center px-2 py-2 bg-gray-50 shadow-inner shadow-gray-400 ring-1 ring-gray-900/5 mx-auto w-full rounded-lg">
                     <label htmlFor="linkedin" className="text-sm font-semibold px-2">LinkedIn</label>
-                    <input type="text" name="linkedin" id="linkedin" placeholder="https://linkedin.com/your_page_name" className="py-1 text-sm sm:text-base bg-transparent focus:border-none focus:ring-0 focus:ring-inset px-2"/>
+                    <input value={formState.linkedin} onChange={handleChange} type="text" name="linkedin" id="linkedin" placeholder="https://linkedin.com/your_page_name" className="py-1 text-sm sm:text-base bg-transparent focus:border-none focus:ring-0 focus:ring-inset px-2"/>
                   </div>{/* <!-- input-linkedin --> */}
 
-                  {otherSocials.map((x,i)=><div key={i} className="grid sm:grid-cols-3 gap-4 p-2 bg-gray-100 rounded-lg">
-                    <div className="input-sociallabel relative grid items-center px-2 py-2 bg-gray-50 shadow-inner shadow-gray-400 ring-1 ring-gray-900/5 mx-auto w-full rounded-lg">
-                      <label htmlFor="sociallabel" className="text-sm font-semibold px-2">Label</label>
-                      <input type="text" name="sociallabel" id={`other-label${i}`} placeholder="" className="w-full py-1 text-sm sm:text-base bg-transparent focus:border-none focus:ring-0 focus:ring-inset px-2"/>
-                    </div>{/* <!-- input-sociallabel --> */}
+                  {formState.otherSocials.map((social, index) => (
+                      <div key={index} className="grid grid-cols-2 gap-2 col-span-2">
+                        <div className="input-deroid-other-label relative grid items-center px-2 py-2 bg-gray-50 shadow-inner shadow-gray-400 ring-1 ring-gray-900/5 mx-auto w-full rounded-lg">
+                          <label htmlFor={`other-label-${index}`} className="text-sm font-semibold px-2">Social Media Label</label>
+                          <input
+                            value={social.label}
+                            onChange={(e) => handleChange(e, index, 'label')}
+                            type="text"
+                            name={`other-label-${index}`}
+                            id={`other-label-${index}`}
+                            placeholder="Label"
+                            className="py-1 text-sm sm:text-base bg-transparent focus:border-none focus:ring-0 focus:ring-inset px-2"
+                          />
+                        </div>{/* <!-- input-deroid-other-label --> */}
 
-                    <div className="input-socialurl sm:last:col-span-2 relative grid items-center px-2 py-2 bg-gray-50 shadow-inner shadow-gray-400 ring-1 ring-gray-900/5 mx-auto w-full rounded-lg">
-                      <label htmlFor="socialurl" className="text-sm font-semibold px-2">URL</label>
-                      <input type="text" name="socialurl" id={`other-url${i}`} placeholder="https://website.com/your_page_name" className="w-full py-1 text-sm sm:text-base bg-transparent focus:border-none focus:ring-0 focus:ring-inset px-2"/>
-                    </div>{/* <!-- input-lastname --> */}
-                  </div>)}
+                        <div className="input-deroid-other-url relative grid items-center px-2 py-2 bg-gray-50 shadow-inner shadow-gray-400 ring-1 ring-gray-900/5 mx-auto w-full rounded-lg">
+                          <label htmlFor={`other-url-${index}`} className="text-sm font-semibold px-2">URL</label>
+                          <input
+                            value={social.url}
+                            onChange={(e) => handleChange(e, index, 'url')}
+                            type="text"
+                            name={`other-url-${index}`}
+                            id={`other-url-${index}`}
+                            placeholder="URL"
+                            className="py-1 text-sm sm:text-base bg-transparent focus:border-none focus:ring-0 focus:ring-inset px-2"
+                          />
+                        </div>{/* <!-- input-deroid-other-url --> */}
+                      </div>
+                    ))}
 
                   <div className="flex">
                     <div onClick={handleAddOtherSocial} className="text-sm bg-gray-200 px-4 py-2 rounded-md shadow-sm shadow-gray-400 cursor-pointer">Add Another</div>
@@ -266,11 +334,11 @@ const LeftContent:React.FC<{setShowSaveProfile:any,setShowRegisterDeroIDModal:an
                   </div>
 
                   <div className="address-toggle flex items-center justify-between gap-4">
-                    <div className="physical text-sm text-center py-2 ring-1 ring-gray-600 rounded-md w-full cursor-pointer shadow-inner shadow-gray-400">Billing</div>
-                    <div className="mailing text-sm text-center py-2 ring-1 ring-gray-600 rounded-md w-full cursor-pointer bg-gray-100 hover:shadow-inner hover:shadow-gray-400">Shipping</div>  
+                    <div onClick={()=>setAddressForm("billing")} className={`physical text-sm text-center py-2 ring-1 ring-gray-600 rounded-md w-full cursor-pointer ${addressForm=="billing"?'shadow-inner shadow-gray-400':'bg-gray-100 hover:shadow-inner hover:shadow-gray-400'}`}>Billing</div>
+                    <div onClick={()=>setAddressForm("shipping")} className={`mailing text-sm text-center py-2 ring-1 ring-gray-600 rounded-md w-full cursor-pointer ${addressForm=="shipping"?'shadow-inner shadow-gray-400':'bg-gray-100 hover:shadow-inner hover:shadow-gray-400'}`}>Shipping</div>  
                   </div>{/* <!-- address-toggle --> */}
 
-                  <div className="billing-address-fields flex flex-col gap-4">
+                  {addressForm=="billing"&&<div className="billing-address-fields flex flex-col gap-4">
                     <div className="address-public grid grid-flow-col justify-start items-center gap-3 mx-auto w-full px-2">
                       <input id="address_public" type="checkbox" value="" className="w-5 h-5 bg-gray-100 border-gray-300 rounded focus:ring-2"/>
                       <label htmlFor="address_public" className="checkbox text-sm font-medium">Make my billing address publicly viewable.</label>
@@ -278,39 +346,39 @@ const LeftContent:React.FC<{setShowSaveProfile:any,setShowRegisterDeroIDModal:an
 
                     <div className="input-address1 relative grid items-center px-2 py-2 bg-gray-50 shadow-inner shadow-gray-400 ring-1 ring-gray-900/5 mx-auto w-full rounded-lg">
                       <label htmlFor="address1" className="text-sm font-semibold px-2">Address Line 1</label>
-                      <input type="text" name="address1" id="address1" placeholder="" className="py-1 text-sm sm:text-base bg-transparent focus:border-none focus:ring-0 focus:ring-inset px-2"/>
+                      <input value={formState.billingAddress.line1} onChange={handleChange} type="text" name="billingAddress.line1" id="address1" placeholder="" className="py-1 text-sm sm:text-base bg-transparent focus:border-none focus:ring-0 focus:ring-inset px-2"/>
                     </div>{/* <!-- input-address1 --> */}
 
                     <div className="input-address2 relative grid items-center px-2 py-2 bg-gray-50 shadow-inner shadow-gray-400 ring-1 ring-gray-900/5 mx-auto w-full rounded-lg">
                       <label htmlFor="address2" className="text-sm font-semibold px-2">Address Line 2</label>
-                      <input type="text" name="address2" id="address2" placeholder="" className="py-1 text-sm sm:text-base bg-transparent focus:border-none focus:ring-0 focus:ring-inset px-2"/>
+                      <input value={formState.billingAddress.line2} onChange={handleChange} type="text" name="billingAddress.line2" id="address2" placeholder="" className="py-1 text-sm sm:text-base bg-transparent focus:border-none focus:ring-0 focus:ring-inset px-2"/>
                     </div>{/* <!-- input-address2 --> */}
 
                     <div className="input-city relative grid items-center px-2 py-2 bg-gray-50 shadow-inner shadow-gray-400 ring-1 ring-gray-900/5 mx-auto w-full rounded-lg">
                       <label htmlFor="city" className="text-sm font-semibold px-2">City</label>
-                      <input type="text" name="city" id="city" placeholder="" className="py-1 text-sm sm:text-base bg-transparent focus:border-none focus:ring-0 focus:ring-inset px-2"/>
+                      <input value={formState.billingAddress.city} onChange={handleChange} type="text" name="billingAddress.city" id="city" placeholder="" className="py-1 text-sm sm:text-base bg-transparent focus:border-none focus:ring-0 focus:ring-inset px-2"/>
                     </div>{/* <!-- input-city --> */}
 
                     <div className="grid sm:grid-cols-2 gap-4">
                       <div className="input-state relative grid items-center px-2 py-2 bg-gray-50 shadow-inner shadow-gray-400 ring-1 ring-gray-900/5 mx-auto w-full rounded-lg">
                         <label htmlFor="state" className="text-sm font-semibold px-2">State/Province</label>
-                        <input type="text" name="state" id="state" placeholder="" className="py-1 text-sm sm:text-base bg-transparent focus:border-none focus:ring-0 focus:ring-inset px-2"/>
+                        <input value={formState.billingAddress.state} onChange={handleChange} type="text" name="billingAddress.state" id="state" placeholder="" className="py-1 text-sm sm:text-base bg-transparent focus:border-none focus:ring-0 focus:ring-inset px-2"/>
                       </div>{/* <!-- input-state --> */}
 
                       <div className="input-zipcode relative grid items-center px-2 py-2 bg-gray-50 shadow-inner shadow-gray-400 ring-1 ring-gray-900/5 mx-auto w-full rounded-lg">
                         <label htmlFor="zipcode" className="text-sm font-semibold px-2">Zip/Postal Code</label>
-                        <input type="text" name="zipcode" id="zipcode" placeholder="" className="py-1 text-sm sm:text-base bg-transparent focus:border-none focus:ring-0 focus:ring-inset px-2"/>
+                        <input value={formState.billingAddress.zip} onChange={handleChange} type="text" name="billingAddress.zip" id="zipcode" placeholder="" className="py-1 text-sm sm:text-base bg-transparent focus:border-none focus:ring-0 focus:ring-inset px-2"/>
                       </div>{/* <!-- input-zipcode --> */}
                     </div>
 
                     <div className="input-country relative grid items-center px-2 py-2 bg-gray-50 shadow-inner shadow-gray-400 ring-1 ring-gray-900/5 mx-auto w-full rounded-lg">
                       <label htmlFor="country" className="text-sm font-semibold px-2">Country</label>
-                      <input type="text" name="country" id="country" placeholder="" className="py-1 text-sm sm:text-base bg-transparent focus:border-none focus:ring-0 focus:ring-inset px-2"/>
+                      <input value={formState.billingAddress.country} onChange={handleChange} type="text" name="billingAddress.country" id="country" placeholder="" className="py-1 text-sm sm:text-base bg-transparent focus:border-none focus:ring-0 focus:ring-inset px-2"/>
                     </div>{/* <!-- input-country --> */}
 
-                  </div>{/* <!-- billing-address-fields --> */}
+                  </div>}{/* <!-- billing-address-fields --> */}
 
-                  <div className="hidden shipping-address-fields flex flex-col gap-4">
+                  {addressForm=="shipping"&&<div className="shipping-address-fields flex flex-col gap-4">
                     <div className="copy-physical grid grid-flow-col justify-start items-center gap-3 mx-auto w-full px-2">
                       <input id="copy_billing" type="checkbox" value="" className="w-5 h-5 bg-gray-100 border-gray-300 rounded focus:ring-2"/>
                       <label htmlFor="copy_billing" className="checkbox text-sm font-medium">Shipping address is the same as billing.</label>
@@ -321,39 +389,39 @@ const LeftContent:React.FC<{setShowSaveProfile:any,setShowRegisterDeroIDModal:an
                       <label htmlFor="shipping_public" className="checkbox text-sm font-medium">Make my shipping address publicly viewable.</label>
                     </div>{/* <!-- address-public --> */}
 
-                    <div className="input-shipaddress1 relative grid items-center px-2 py-2 bg-gray-50 shadow-inner shadow-gray-400 ring-1 ring-gray-900/5 mx-auto w-full rounded-lg">
-                      <label htmlFor="shipaddress1" className="text-sm font-semibold px-2">Address Line 1</label>
-                      <input type="text" name="shipaddress1" id="shipaddress1" placeholder="" className="py-1 text-sm sm:text-base bg-transparent focus:border-none focus:ring-0 focus:ring-inset px-2"/>
-                    </div>{/* <!-- input-shipaddress1 --> */}
+                    <div className="input-address1 relative grid items-center px-2 py-2 bg-gray-50 shadow-inner shadow-gray-400 ring-1 ring-gray-900/5 mx-auto w-full rounded-lg">
+                      <label htmlFor="address1" className="text-sm font-semibold px-2">Address Line 1</label>
+                      <input value={formState.shippingAddress.line1} onChange={handleChange} type="text" name="shippingAddress.line1" id="address1" placeholder="" className="py-1 text-sm sm:text-base bg-transparent focus:border-none focus:ring-0 focus:ring-inset px-2"/>
+                    </div>{/* <!-- input-address1 --> */}
 
-                    <div className="input-shipaddress2 relative grid items-center px-2 py-2 bg-gray-50 shadow-inner shadow-gray-400 ring-1 ring-gray-900/5 mx-auto w-full rounded-lg">
-                      <label htmlFor="shipaddress2" className="text-sm font-semibold px-2">Address Line 2</label>
-                      <input type="text" name="shipaddress2" id="shipaddress2" placeholder="" className="py-1 text-sm sm:text-base bg-transparent focus:border-none focus:ring-0 focus:ring-inset px-2"/>
-                    </div>{/* <!-- input-shipaddress2 --> */}
+                    <div className="input-address2 relative grid items-center px-2 py-2 bg-gray-50 shadow-inner shadow-gray-400 ring-1 ring-gray-900/5 mx-auto w-full rounded-lg">
+                      <label htmlFor="address2" className="text-sm font-semibold px-2">Address Line 2</label>
+                      <input value={formState.shippingAddress.line2} onChange={handleChange} type="text" name="shippingAddress.line2" id="address2" placeholder="" className="py-1 text-sm sm:text-base bg-transparent focus:border-none focus:ring-0 focus:ring-inset px-2"/>
+                    </div>{/* <!-- input-address2 --> */}
 
-                    <div className="input-shipcity relative grid items-center px-2 py-2 bg-gray-50 shadow-inner shadow-gray-400 ring-1 ring-gray-900/5 mx-auto w-full rounded-lg">
-                      <label htmlFor="shipcity" className="text-sm font-semibold px-2">City</label>
-                      <input type="text" name="shipcity" id="shipcity" placeholder="" className="py-1 text-sm sm:text-base bg-transparent focus:border-none focus:ring-0 focus:ring-inset px-2"/>
-                    </div>{/* <!-- input-shipcity --> */}
+                    <div className="input-city relative grid items-center px-2 py-2 bg-gray-50 shadow-inner shadow-gray-400 ring-1 ring-gray-900/5 mx-auto w-full rounded-lg">
+                      <label htmlFor="city" className="text-sm font-semibold px-2">City</label>
+                      <input value={formState.shippingAddress.city} onChange={handleChange} type="text" name="shippingAddress.city" id="city" placeholder="" className="py-1 text-sm sm:text-base bg-transparent focus:border-none focus:ring-0 focus:ring-inset px-2"/>
+                    </div>{/* <!-- input-city --> */}
 
                     <div className="grid sm:grid-cols-2 gap-4">
-                      <div className="input-shipstate relative grid items-center px-2 py-2 bg-gray-50 shadow-inner shadow-gray-400 ring-1 ring-gray-900/5 mx-auto w-full rounded-lg">
-                        <label htmlFor="shipstate" className="text-sm font-semibold px-2">State/Province</label>
-                        <input type="text" name="shipstate" id="shipstate" placeholder="" className="py-1 text-sm sm:text-base bg-transparent focus:border-none focus:ring-0 focus:ring-inset px-2"/>
-                      </div>{/* <!-- input-shipstate --> */}
+                      <div className="input-state relative grid items-center px-2 py-2 bg-gray-50 shadow-inner shadow-gray-400 ring-1 ring-gray-900/5 mx-auto w-full rounded-lg">
+                        <label htmlFor="state" className="text-sm font-semibold px-2">State/Province</label>
+                        <input value={formState.shippingAddress.state} onChange={handleChange} type="text" name="shippingAddress.state" id="state" placeholder="" className="py-1 text-sm sm:text-base bg-transparent focus:border-none focus:ring-0 focus:ring-inset px-2"/>
+                      </div>{/* <!-- input-state --> */}
 
-                      <div className="input-shipzipcode relative grid items-center px-2 py-2 bg-gray-50 shadow-inner shadow-gray-400 ring-1 ring-gray-900/5 mx-auto w-full rounded-lg">
-                        <label htmlFor="shipzipcode" className="text-sm font-semibold px-2">Zip/Postal Code</label>
-                        <input type="text" name="shipzipcode" id="shipzipcode" placeholder="" className="py-1 text-sm sm:text-base bg-transparent focus:border-none focus:ring-0 focus:ring-inset px-2"/>
-                      </div>{/* <!-- input-shipzipcode --> */}
+                      <div className="input-zipcode relative grid items-center px-2 py-2 bg-gray-50 shadow-inner shadow-gray-400 ring-1 ring-gray-900/5 mx-auto w-full rounded-lg">
+                        <label htmlFor="zipcode" className="text-sm font-semibold px-2">Zip/Postal Code</label>
+                        <input value={formState.shippingAddress.zip} onChange={handleChange} type="text" name="shippingAddress.zip" id="zipcode" placeholder="" className="py-1 text-sm sm:text-base bg-transparent focus:border-none focus:ring-0 focus:ring-inset px-2"/>
+                      </div>{/* <!-- input-zipcode --> */}
                     </div>
 
-                    <div className="input-shipcountry relative grid items-center px-2 py-2 bg-gray-50 shadow-inner shadow-gray-400 ring-1 ring-gray-900/5 mx-auto w-full rounded-lg">
-                      <label htmlFor="shipcountry" className="text-sm font-semibold px-2">Country</label>
-                      <input type="text" name="shipcountry" id="shipcountry" placeholder="" className="py-1 text-sm sm:text-base bg-transparent focus:border-none focus:ring-0 focus:ring-inset px-2"/>
+                    <div className="input-country relative grid items-center px-2 py-2 bg-gray-50 shadow-inner shadow-gray-400 ring-1 ring-gray-900/5 mx-auto w-full rounded-lg">
+                      <label htmlFor="country" className="text-sm font-semibold px-2">Country</label>
+                      <input value={formState.shippingAddress.country} onChange={handleChange} type="text" name="shippingAddress.country" id="country" placeholder="" className="py-1 text-sm sm:text-base bg-transparent focus:border-none focus:ring-0 focus:ring-inset px-2"/>
                     </div>{/* <!-- input-shipcountry --> */}
 
-                  </div>
+                  </div>}
                   </>{/* <!-- shipping-address-fields --> */}
 
                 </div>{/* <!-- input-fields --> */}

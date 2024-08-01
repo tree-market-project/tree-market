@@ -180,4 +180,11 @@ export type DeroID = {
   registered?:boolean;
   description?:string;
   image?:string;
+  fb?:string;
+  insta?:string;
+  twitter?:string;
+  linkedin?:string;
+  otherSocials?:{ label: string; url: string }[];
+  billingAddress?:{line1:string; line2: string; city:string;state:string; zip: string; country: string};
+  shippingAddress?:{line1:string; line2: string; city:string;state:string; zip: string; country: string};
 }
