@@ -104,6 +104,115 @@ const SaveProfileDetailsModal:React.FC<{setShow:any}> = ({setShow}) =>{
         {newDetails?.phone}
       </div>
     </div> 
+    <div className="grid grid-cols-3 gap-2 pt-2">
+      <div className="title px-4 font-medium">Website</div>
+      <div className="data col-span-2 px-4">
+        {newDetails?.website}
+      </div>
+    </div>
+    <div className="grid grid-cols-3 gap-2 pt-2">
+      <div className="title px-4 font-medium">Facebook</div>
+      <div className="data col-span-2 px-4">
+        {newDetails?.fb}
+      </div>
+    </div>  
+    <div className="grid grid-cols-3 gap-2 pt-2">
+      <div className="title px-4 font-medium">Instagram</div>
+      <div className="data col-span-2 px-4">
+        {newDetails?.insta}
+      </div>
+    </div> 
+    <div className="grid grid-cols-3 gap-2 pt-2">
+      <div className="title px-4 font-medium">X (Twitter)</div>
+      <div className="data col-span-2 px-4">
+        {newDetails?.twitter}
+      </div>
+    </div> 
+    <div className="grid grid-cols-3 gap-2 pt-2">
+      <div className="title px-4 font-medium">LinkedIn</div>
+      <div className="data col-span-2 px-4">
+        {newDetails?.linkedin}
+      </div>
+    </div> 
+    {newDetails?.otherSocials?.map(x=><div className="grid grid-cols-3 gap-2 pt-2">
+      <div className="title px-4 font-medium">{x.label}</div>
+      <div className="data col-span-2 px-4">
+        {x?.url}
+      </div>
+    </div> )}
+    <div className="grid grid-cols-3 gap-2 pt-2">
+      <div className="title px-4 font-medium">Address Line 1</div>
+      <div className="data col-span-2 px-4">
+        {newDetails?.billingAddress?.line1}
+      </div>
+    </div>
+    <div className="grid grid-cols-3 gap-2 pt-2">
+      <div className="title px-4 font-medium">Address Line 2</div>
+      <div className="data col-span-2 px-4">
+        {newDetails?.billingAddress?.line2}
+      </div>
+    </div>
+    <div className="grid grid-cols-3 gap-2 pt-2">
+      <div className="title px-4 font-medium">City</div>
+      <div className="data col-span-2 px-4">
+        {newDetails?.billingAddress?.city}
+      </div>
+    </div>
+    <div className="grid grid-cols-3 gap-2 pt-2">
+      <div className="title px-4 font-medium">State/Province</div>
+      <div className="data col-span-2 px-4">
+        {newDetails?.billingAddress?.state}
+      </div>
+    </div>
+    <div className="grid grid-cols-3 gap-2 pt-2">
+      <div className="title px-4 font-medium">Zip/Postal Code</div>
+      <div className="data col-span-2 px-4">
+        {newDetails?.billingAddress?.zip}
+      </div>
+    </div>
+    <div className="grid grid-cols-3 gap-2 pt-2">
+      <div className="title px-4 font-medium">Country</div>
+      <div className="data col-span-2 px-4">
+        {newDetails?.billingAddress?.country}
+      </div>
+    </div>
+    <div className="grid grid-cols-3 gap-2 pt-2">
+      <div className="title px-4 font-medium">Address Line 1</div>
+      <div className="data col-span-2 px-4">
+        {newDetails?.shippingAddress?.line1}
+      </div>
+    </div>
+    <div className="grid grid-cols-3 gap-2 pt-2">
+      <div className="title px-4 font-medium">Address Line 2</div>
+      <div className="data col-span-2 px-4">
+        {newDetails?.shippingAddress?.line2}
+      </div>
+    </div>
+    <div className="grid grid-cols-3 gap-2 pt-2">
+      <div className="title px-4 font-medium">City</div>
+      <div className="data col-span-2 px-4">
+        {newDetails?.shippingAddress?.city}
+      </div>
+    </div>
+    <div className="grid grid-cols-3 gap-2 pt-2">
+      <div className="title px-4 font-medium">State/Province</div>
+      <div className="data col-span-2 px-4">
+        {newDetails?.shippingAddress?.state}
+      </div>
+    </div>
+    <div className="grid grid-cols-3 gap-2 pt-2">
+      <div className="title px-4 font-medium">Zip/Postal Code</div>
+      <div className="data col-span-2 px-4">
+        {newDetails?.shippingAddress?.zip}
+      </div>
+    </div>
+    <div className="grid grid-cols-3 gap-2 pt-2">
+      <div className="title px-4 font-medium">Country</div>
+      <div className="data col-span-2 px-4">
+        {newDetails?.shippingAddress?.country}
+      </div>
+    </div>
+
 </div>{/* <!-- deroid-info --> */}
 
 <div className="txfee grid gap-3 px-2 py-1 border-l-4 border-cyan-800">
