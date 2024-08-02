@@ -32,7 +32,7 @@ const LeftContent:React.FC<{setShowNewDeroIDModal:any,setShowRegisterWalletName:
                     </div>
                   </div>{/* <!-- nameservice-info --> */}
                   <div className="icon">
-                    <img src="https://digitalbanjare.com/img/wallet/deroweb-icon.png" className="w-[24px] mx-auto" />
+                    <img src="https://tree.market/images/icons/deroweb-icon.png" className="w-[24px] mx-auto" />
                   </div>{/* <!-- icon --> */}
                 </div>{/* <!-- nameservice-tile deroweb --> */}
 
