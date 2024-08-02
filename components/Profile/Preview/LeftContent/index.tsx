@@ -7,7 +7,7 @@ import { useEffect, useState } from "react"
 import { useWalletContext } from "@/contexts"
 
 const LeftContent:React.FC<{toasterRef:any}> = ({toasterRef})=>{
-  
+  const [addressType,setAddressType] = useState("shipping")
   const searchParams = useSearchParams()
   const {activeWallet} = useWalletContext()
   const scidParam = searchParams.get("scid")
@@ -81,85 +81,85 @@ return(
                       </div>
 
                       <div className="flex flex-col sm:flex-row items-start justify-between gap-4 sm:gap-8">
-                        {/* <div className="contact-details grid gap-1 sm:order-2">
+                         <div className="contact-details grid gap-1 sm:order-2">
                           <div className="deroid-website text-sm flex items-center gap-1">
                             <div className="w-[15px]">&#9741;</div>
-                            <div><a href="https://tree.market" target="_blank" className="text-[#3429a5]">https://tree.market</a></div>
+                            <div><a href={id.website} target="_blank" className="text-[#3429a5]">{id.website}</a></div>
                           </div>
                           <div className="deroid-email text-sm flex items-center gap-1">
                             <div className="w-[15px]">&#10147;</div>
-                            <div><a href="mailto:treemates@tree.market" target="_blank" className="text-[#3429a5]">treemates@tree.market</a></div>
+                            <div><a href={`mailto:${id.email}`} target="_blank" className="text-[#3429a5]">{id.email}</a></div>
                           </div>
                           <div className="deroid-phone text-sm flex items-center gap-1">
                             <div className="w-[15px]">&#9990;</div>
-                            <div><a href="tel:+1 555 555-5555" target="_blank" className="text-[#3429a5]">+1 555 555-5555</a></div>
+                            <div><a href={`tel:${id.phone}`} target="_blank" className="text-[#3429a5]">{id.phone}</a></div>
                           </div>
-                        </div> */}{/* <!-- contact-details --> */}
+                        </div> {/* <!-- contact-details --> */}
                         <div className="deroidbio text-sm space-y-2 sm:order-1">
                           {id.description}
                         </div>{/* <!-- deroidbio --> */}
                       </div>
 
-                     {/* <hr />
+                      <hr />
                        <div className="deroidsocial-links relative w-full grid gap-1">
                         <h4 className="text-xs font-semibold">Social Links</h4>
                         <div className="flex flex-wrap items-center gap-3">
-                          <div className="text-xs bg-gray-200 px-3 py-2 rounded-md cursor-pointer hover:ring-1 hover:ring-gray-400">
+                          <a href={id.fb} target="_blank" className="text-xs bg-gray-200 px-3 py-2 rounded-md cursor-pointer hover:ring-1 hover:ring-gray-400">
                             Facebook
-                          </div>
-                          <div className="text-xs bg-gray-200 px-3 py-2 rounded-md cursor-pointer hover:ring-1 hover:ring-gray-400">
+                          </a>
+                          <a href={id.insta} target="_blank" className="text-xs bg-gray-200 px-3 py-2 rounded-md cursor-pointer hover:ring-1 hover:ring-gray-400">
                             Instagram
-                          </div>
-                          <div className="text-xs bg-gray-200 px-3 py-2 rounded-md cursor-pointer hover:ring-1 hover:ring-gray-400">
+                          </a>
+                          <a href={id.twitter} target="_blank" className="text-xs bg-gray-200 px-3 py-2 rounded-md cursor-pointer hover:ring-1 hover:ring-gray-400">
                             X (Twitter)
-                          </div>
-                          <div className="text-xs bg-gray-200 px-3 py-2 rounded-md cursor-pointer hover:ring-1 hover:ring-gray-400">
+                          </a>
+                          <a href={id.linkedin} target="_blank" className="text-xs bg-gray-200 px-3 py-2 rounded-md cursor-pointer hover:ring-1 hover:ring-gray-400">
                             LinkedIn
-                          </div>
-                          <div className="text-xs bg-gray-200 px-3 py-2 rounded-md cursor-pointer hover:ring-1 hover:ring-gray-400">
-                            Private Islands
-                          </div>
-                          <div className="text-xs bg-gray-200 px-3 py-2 rounded-md cursor-pointer hover:ring-1 hover:ring-gray-400">
-                            Phoenix
-                          </div>
+                          </a>
+                          {id.otherSocials?.filter(x=>x.label&&x.url).map(x=>
+                            <a href={x.url} target="_blank" className="text-xs bg-gray-200 px-3 py-2 rounded-md cursor-pointer hover:ring-1 hover:ring-gray-400">
+                            {x.label}
+                          </a>
+                          )}
+                          
                         </div>
-                      </div> */}{/* <!-- deroidsocial-links --> */}
+                      </div> {/* <!-- deroidsocial-links --> */}
 
-                      {/* <hr />
+                       <hr />
                       <div className="deroid-address relative w-full grid gap-1">
                         <div className="flex items-center justify-between gap-4">
                           <h4 className="text-xs font-semibold">Address</h4>
                           <div className="flex items-center gap-2 text-xs">
-                            <div className="selected text-gray-700 cursor-default">Shipping</div>
+                            <div onClick={()=>setAddressType("shipping")} className={addressType=="shipping"?`selected text-gray-700 cursor-default`:`unselected text-[#3429a5] cursor-pointer hover:underline`}>Shipping</div>
                             <div>|</div>
-                            <div className="unselected text-[#3429a5] cursor-pointer hover:underline">Billing</div>
+                            <div onClick={()=>setAddressType("billing")} className={addressType=="billing"?`selected text-gray-700 cursor-default`:`unselected text-[#3429a5] cursor-pointer hover:underline`}>Billing</div>
                           </div>
                         </div>
                         <div className="grid gap-1 text-xs">
                           <div className="address1">
-                            123 Street A North
+                            {id.shippingAddress?.line2}
                           </div>
                           <div className="address2">
-                            Apt. 345
+                            {id.shippingAddress?.line2}
                           </div>
                           <div className="flex flex-wrap items-center gap-1">
                             <div className="city">
-                              New York,
+                              {id.shippingAddress?.city},
                             </div>
                             <div className="state">
-                              NY,
+                              {id.shippingAddress?.state},
                             </div>
                             <div className="zip">
-                              04878,
+                              {id.shippingAddress?.zip},
                             </div>
                             <div className="country">
-                              USA
+                              {id.shippingAddress?.country}
                             </div>
                           </div>
                           
                           
                         </div>
-                      </div> */}{/* <!-- deroid-address --> */}
+                      </div> {/* <!-- deroid-address --> */}
                     </div>
                   </div>
                   <div className="bottom-row grid gap-4">
