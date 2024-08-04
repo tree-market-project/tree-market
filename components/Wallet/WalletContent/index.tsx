@@ -231,7 +231,7 @@ const WalletContent:React.FC<{toasterRef:any,setShowConfirmRemoveModal:any,setSh
                       </div>
                     </div>{/* <!-- wallet-info --> */}
                     <div className="icon">
-                      <img src="https://digitalbanjare.com/img/wallet/deroweb-icon.png" className="w-[24px] mx-auto" />
+                      <img src="https://tree.market/images/icons/deroweb-icon.png" className="w-[24px] mx-auto" />
                     </div>{/* <!-- icon --> */}
                   </div>{/* <!-- wallet-tile deroweb --> */}
 
@@ -253,7 +253,7 @@ const WalletContent:React.FC<{toasterRef:any,setShowConfirmRemoveModal:any,setSh
                       </div>
                     </div>{/* <!-- wallet-info --> */}
                     <div className="icon">
-                      <img src="https://digitalbanjare.com/img/wallet/engram-icon.png" className="w-[22px] mx-auto" />
+                      <img src="https://tree.market/images/icons/engram-icon.png" className="w-[22px] mx-auto" />
                     </div>{/* <!-- icon --> */}
                   </div>{/* <!-- wallet-tile engram --> */}
 
@@ -510,20 +510,20 @@ const WalletContent:React.FC<{toasterRef:any,setShowConfirmRemoveModal:any,setSh
                       <h3 className="font-semibold text-lg">Guide</h3>
                       <p>Engram uses Cyberdeck to connect to apps. To connect to a web app you need the rpc bridge browser extension.</p>
                       <p>1. Click &quot;Select Module ...&quot;</p>
-                      <img src="https://digitalbanjare.com/img/wallet/engram1.jpg" className="mx-auto" />
+                      <img src="https://tree.market/images/engram1.jpg" className="mx-auto" />
 
                       <p>2. Select &quot;Cyberdeck&quot;</p>
-                      <img src="https://digitalbanjare.com/img/wallet/engram2.jpg" className="mx-auto" />
+                      <img src="https://tree.market/images/engram2.jpg" className="mx-auto" />
 
                       <p>3. Turn On</p>
-                      <img src="https://digitalbanjare.com/img/wallet/engram3.jpg" className="mx-auto" />
+                      <img src="https://tree.market/images/engram3.jpg" className="mx-auto" />
 
                       <p>4. Copy Credentials</p>
-                      <img src="https://digitalbanjare.com/img/wallet/engram4.jpg" className="mx-auto" />
+                      <img src="https://tree.market/images/engram4.jpg" className="mx-auto" />
 
                       <p>5. Fill in details in Dero RPC Bridge</p>
                         <div className="rpc-details ml-4 grid gap-6">
-                          <p>a. <img src="https://digitalbanjare.com/img/wallet/rpc1.jpg" className="mx-auto" /></p>
+                          <p>a. <img src="https://tree.market/images/rpc1.jpg" className="mx-auto" /></p>
 
                           <p>b. If you are running your own node on this machine you can put http://127.0.0.1:10102 for &quot;Daemon RPC&quot;.</p>
 
@@ -533,13 +533,13 @@ const WalletContent:React.FC<{toasterRef:any,setShowConfirmRemoveModal:any,setSh
 
                           <p>e. Under RPC Login paste the credentials you copied from engram.</p>
 
-                          <p><img src="https://digitalbanjare.com/img/wallet/rpc2.jpg" className="mx-auto" /></p>
+                          <p><img src="https://tree.market/images/rpc2.jpg" className="mx-auto" /></p>
 
                           <p>f. Here I have pasted <em>user:password</em> into the user field. Next I need to copy just the password into the password field, and delete the &quot;:&quot;.</p>
 
                           <p>g. Next click &quot;SET&quot;</p>
 
-                          <p><img src="https://digitalbanjare.com/img/wallet/rpc3.jpg" className="mx-auto" /></p>
+                          <p><img src="https://tree.market/images/rpc3.jpg" className="mx-auto" /></p>
                         </div>{/* <!-- rpc-details --> */}
 
                     </div>{/* <!-- instructions --> */}
@@ -570,7 +570,7 @@ const WalletContent:React.FC<{toasterRef:any,setShowConfirmRemoveModal:any,setSh
                     <h3 className="font-semibold text-lg">Guide</h3>
 
                     <p>1. If you are not already connected to a node, the wallet should prompt you to select one which brings you to the following screen. You can also get there by selecting the 2nd icon from the right at the bottom of the screen.</p>
-                    <img src="https://digitalbanjare.com/img/wallet/g45w1.jpg" className="mx-auto" />
+                    <img src="https://tree.market/images/g45w1.jpg" className="mx-auto" />
 
                     <p>2. You have several options:</p>
                     <ul className="list-disc ml-8 space-y-3">
@@ -580,7 +580,7 @@ const WalletContent:React.FC<{toasterRef:any,setShowConfirmRemoveModal:any,setSh
                     </ul>
 
                     <p>3. Once you have selected your node, navigate to the wallet screen and click at the top where it says &quot;XSWD OFF&quot;.</p>
-                    <img src="https://digitalbanjare.com/img/wallet/g45w2.jpg" className="mx-auto" />
+                    <img src="https://tree.market/images/g45w2.jpg" className="mx-auto" />
 
                     <p>4. Once XSWD is on, you can click the connect button on the webapp (at tree.market/wallet). You will then need to back to your G45W and confirm the connection in the app.</p>
 
@@ -613,7 +613,7 @@ const WalletContent:React.FC<{toasterRef:any,setShowConfirmRemoveModal:any,setSh
 
                     <p>2. Enter user and password into rpc bridge extension.</p>
                       <div className="rpc-details ml-4 grid gap-6">
-                        <p>a. <img src="https://digitalbanjare.com/img/wallet/rpc1.jpg" className="mx-auto" /></p>
+                        <p>a. <img src="https://tree.market/images/rpc1.jpg" className="mx-auto" /></p>
 
                         <p>b. If you are running your own node on this machine you can put http://127.0.0.1:10102 for &quot;Daemon RPC&quot;.</p>
 
@@ -623,13 +623,13 @@ const WalletContent:React.FC<{toasterRef:any,setShowConfirmRemoveModal:any,setSh
 
                         <p>e. Under RPC Login paste the credentials you copied from engram.</p>
 
-                        <p><img src="https://digitalbanjare.com/img/wallet/rpc2.jpg" className="mx-auto" /></p>
+                        <p><img src="https://tree.market/images/rpc2.jpg" className="mx-auto" /></p>
 
                         <p>f. Here I have pasted <em>user:password</em> into the user field. Next I need to copy just the password into the password field, and delete the &quot;:&quot;.</p>
 
                         <p>g. Next click &quot;SET&quot;</p>
 
-                        <p><img src="https://digitalbanjare.com/img/wallet/rpc3.jpg" className="mx-auto" /></p>
+                        <p><img src="https://tree.market/images/rpc3.jpg" className="mx-auto" /></p>
                       </div>{/* <!-- rpc-details --> */}
                     
                   </div>{/* <!-- instructions --> */}

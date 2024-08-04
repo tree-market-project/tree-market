@@ -17,7 +17,7 @@ export function useMintDeroID(){
         const data:any = {ringsize:2,scid:"",sc:sc,sc_rpc:[{name:"SC_ACTION",datatype:"U",value:1},{name:"SC_CODE",datatype:"S",value:text},{name:"entrypoint",datatype:"S",value:"Initialize"}]}
         const txid = await transfer(data,worker||null)
         let newWallet :wallet= JSON.parse(JSON.stringify(activeWallet))
-        newWallet.balances.push({name:"deroID",scid:txid,balance:1,symbol:"deroID",iconURL:"https://digitalbanjare.com/img/wallet/deroweb-icon.png"})
+        newWallet.balances.push({name:"deroID",scid:txid,balance:1,symbol:"deroID",iconURL:"https://tree.market/images/icons/deroweb-icon.png"})
         setActiveWallet(newWallet)
         let index = walletList.findIndex(wallet=>wallet.active)
         let newList = walletList

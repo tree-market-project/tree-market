@@ -120,7 +120,7 @@ const TokenSlideout:React.FC<{toasterRef:any,setShowRemoveTokenModal:any,setShow
                     </div>
                   </div>
                   <div className="icon hidden img">
-                    <img src="https://digitalbanjare.com/img/icons/currency/dero-icon.png" className="w-[33px]" />
+                    <img src="https://tree.market/images/currency-icons/dero-icon.png" className="w-[33px]" />
                   </div>{/* <!-- icon --> */}
                   {selectedToken?.scid=="e6e6ae9c8fd2a951d6027103393839b99d1a7d49ebd43e06c9978955e60d27e4"?<>🌿</>
 
