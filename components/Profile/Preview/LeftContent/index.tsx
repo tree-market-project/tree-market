@@ -116,8 +116,8 @@ return(
                           <a href={id.linkedin} target="_blank" className="text-xs bg-gray-200 px-3 py-2 rounded-md cursor-pointer hover:ring-1 hover:ring-gray-400">
                             LinkedIn
                           </a>
-                          {id.otherSocials?.filter(x=>x.label&&x.url).map(x=>
-                            <a href={x.url} target="_blank" className="text-xs bg-gray-200 px-3 py-2 rounded-md cursor-pointer hover:ring-1 hover:ring-gray-400">
+                          {id.otherSocials?.filter(x=>x.label&&x.url).map((x,i)=>
+                            <a key={i} href={x.url} target="_blank" className="text-xs bg-gray-200 px-3 py-2 rounded-md cursor-pointer hover:ring-1 hover:ring-gray-400">
                             {x.label}
                           </a>
                           )}

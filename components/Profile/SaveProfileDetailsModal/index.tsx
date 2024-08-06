@@ -134,7 +134,7 @@ const SaveProfileDetailsModal:React.FC<{setShow:any}> = ({setShow}) =>{
         {newDetails?.linkedin}
       </div>
     </div> 
-    {newDetails?.otherSocials?.map(x=><div className="grid grid-cols-3 gap-2 pt-2">
+    {newDetails?.otherSocials?.map((x,i)=><div key={i} className="grid grid-cols-3 gap-2 pt-2">
       <div className="title px-4 font-medium">{x.label}</div>
       <div className="data col-span-2 px-4">
         {x?.url}
